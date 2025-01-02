@@ -1,0 +1,41 @@
+﻿<Application x:Class="PlanetShoes.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PlanetShoes.Views"
+             xmlns:viewModel="clr-namespace:PlanetShoes.ViewModels">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/UIColors.xaml"/>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/TextboxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:MateriaPrimaViewModel}">
+                <local:MateriaPrimaView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AcabadoViewModel}">
+                <local:AcabadoView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AviamentoViewModel}">
+                <local:AviamentoView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SoladoViewModel}">
+                <local:SoladoView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CabedalViewModel}">
+                <local:CabedalView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:FichaTecnicaViewModel}">
+                <local:FichaTecnicaView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
+                <local:DashboaardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ManualMontagemViewModel}">
+                <local:ManualMontagemView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,132 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Background Colors-->
+    <Color x:Key="primaryBackColor1">#0A003A</Color>
+    <Color x:Key="primaryBackColor2">#1C0E49</Color>
+    <Color x:Key="secondaryBackColor1">#24105F</Color>
+    <Color x:Key="secondaryBackColor2">#210F55</Color>
+    
+    <!--Window Border Colors-->
+    <Color x:Key="winBorderColor1">#6D2FFF</Color>
+    <Color x:Key="winBorderColor2">#FB539B</Color>
+    <Color x:Key="winBorderColor3">#836EFB</Color>
+
+    <!--Color Palette-->
+    <Color x:Key="color1">#E285DE</Color>
+    <Color x:Key="color2">#784DFD</Color>
+    <Color x:Key="color3">#4ADAEC</Color>
+    <Color x:Key="color4">#FB539B</Color>
+    <Color x:Key="color5">#7E82FC</Color>
+    <Color x:Key="color6">#FFC047</Color>
+    <Color x:Key="color7">#EF6C96</Color>
+    <Color x:Key="color8">#78A3FC</Color>
+    <Color x:Key="color9">#07F3C0</Color>
+    <Color x:Key="color10">#FBA1AA</Color>
+    <Color x:Key="color11">#1C0E49</Color>
+    <Color x:Key="color12">#B88A33</Color>
+
+    <!--Color Palette-->
+    <SolidColorBrush x:Key="Solidcolor1" Color="#E285DE"/>
+    <SolidColorBrush x:Key="Solidcolor2" Color="#784DFD"/>
+    <SolidColorBrush x:Key="Solidcolor3" Color="#4ADAEC"/>
+    <SolidColorBrush x:Key="Solidcolor4" Color="#FB539B"/>
+    <SolidColorBrush x:Key="Solidcolor5" Color="#7E82FC"/>
+    <SolidColorBrush x:Key="Solidcolor6" Color="#FFC047"/>
+    <SolidColorBrush x:Key="Solidcolor7" Color="#EF6C96"/>
+    <SolidColorBrush x:Key="Solidcolor8" Color="#78A3FC"/>
+    <SolidColorBrush x:Key="Solidcolor9" Color="#07F3C0"/>
+    <SolidColorBrush x:Key="Solidcolor10" Color="#FBA1AA"/>
+    <SolidColorBrush x:Key="Solidcolor11" Color="#1C0E49"/>
+    <SolidColorBrush x:Key="Solidcolor12" Color="#B88A33"/>
+    
+    <!--Font Colors-->
+    <SolidColorBrush x:Key="titleColor1" Color="#E0E1F1"/>
+    <SolidColorBrush x:Key="titleColor2" Color="#D5CFF5"/>
+    <SolidColorBrush x:Key="titleColor3" Color="#BCBEE0"/>
+    <SolidColorBrush x:Key="plainTextColor1" Color="#9497CD"/>
+    <SolidColorBrush x:Key="plainTextColor2" Color="#7C80C2"/>
+    <SolidColorBrush x:Key="plainTextColor3" Color="#7376BD"/>
+    <SolidColorBrush x:Key="plainTextColor4" Color="#0A003A"/>
+    
+    <!--Panel Colors-->
+    <SolidColorBrush x:Key="panelColor" Color="#200F53"/>
+    <SolidColorBrush x:Key="panelOverColor" Color="#281269"/>
+    <SolidColorBrush x:Key="panelActiveColor" Color="#2B1372"/>
+    
+    <!-- Border Colors -->
+    
+    <!-- Definição do gradiente de fundo -->
+    <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource color8}"  Offset="0.0"/>
+        <GradientStop Color="{StaticResource color3}" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ContentGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0.0"/>
+        <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="FooterGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource color2}" Offset="0.0"/>
+        <GradientStop Color="{StaticResource color8}" Offset="1.0"/>
+    </LinearGradientBrush>
+
+
+    <!-- Estilo para os cabeçalhos -->
+    <Style x:Key="HeaderStyle" TargetType="Border">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Background" Value="{StaticResource HeaderGradient}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <Style x:Key="ContentStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource ContentGradient}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <Style x:Key="FooterStyle" TargetType="Border">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="{StaticResource FooterGradient}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <Style x:Key="PriceHeaderStyle" TargetType="Border">
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Background" Value="{StaticResource Solidcolor6}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+
+    <!--Button Colors-->
+    
+    
+    <!--TextBlock Colors-->
+    <Style x:Key="Title1HeaderStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource Solidcolor11}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <Style x:Key="TextFormStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource plainTextColor1}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
+
+
+    <!--Etc-->
+
+    
+</ResourceDictionary>
