@@ -3,7 +3,7 @@ using PlanetShoes.Core.Interfaces;
 using PlanetShoes.Infrastructure.Data;
 using PlanetShoes.Infrastructure.Repositories;
 using PlanetShoes.Views;
-using System;
+using PlanetShoes.ViewModels;
 using System.Windows;
 
 namespace PlanetShoes
@@ -28,13 +28,20 @@ namespace PlanetShoes
 
         private void ConfigureServices(IServiceCollection services)
         {
-            // Configura o DbContext e o repositório
+            // Configura o DbContext
             services.AddDbContext<PlanetShoesDbContext>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+            // Registra os repositórios
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>(); // Adicionado
+            services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
 
             // Registra as views
             services.AddTransient<LoginView>();
             services.AddTransient<MainView>();
+
+            // Registra os ViewModels
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<MateriaPrimaViewModel>();
         }
     }
 }

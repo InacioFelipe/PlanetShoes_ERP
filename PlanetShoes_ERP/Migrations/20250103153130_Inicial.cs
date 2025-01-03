@@ -5,11 +5,30 @@
 namespace PlanetShoes.Migrations
 {
     /// <inheritdoc />
-    public partial class CriaBancoDeDados : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "MateriasPrimas",
+                columns: table => new
+                {
+                    IdMateriaPrima = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Classe = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnidadeMedida = table.Column<int>(type: "int", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImgMateriaPrima = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MateriasPrimas", x => x.IdMateriaPrima);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
@@ -30,6 +49,9 @@ namespace PlanetShoes.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MateriasPrimas");
+
             migrationBuilder.DropTable(
                 name: "Usuarios");
         }

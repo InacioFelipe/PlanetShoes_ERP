@@ -1,8 +1,7 @@
-﻿// Views/LoginView.xaml.cs
+﻿using Microsoft.Extensions.DependencyInjection;
 using PlanetShoes.Core.Interfaces;
-using PlanetShoes.Infrastructure.Data;
+using PlanetShoes.ViewModels;
 using System.Windows;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PlanetShoes.Views
@@ -10,11 +9,13 @@ namespace PlanetShoes.Views
     public partial class LoginView : Window
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IServiceProvider _serviceProvider;
 
-        public LoginView(IUsuarioRepository usuarioRepository)
+        public LoginView(IUsuarioRepository usuarioRepository, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _usuarioRepository = usuarioRepository;
+            _serviceProvider = serviceProvider;
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -26,9 +27,8 @@ namespace PlanetShoes.Views
 
             if (usuario != null && usuario.Password == password)
             {
-
                 // Login bem-sucedido
-                var mainView = new MainView();
+                var mainView = _serviceProvider.GetRequiredService<MainView>();
                 mainView.Show();
                 this.Close();
             }

@@ -11,8 +11,8 @@ using PlanetShoes.Infrastructure.Data;
 namespace PlanetShoes.Migrations
 {
     [DbContext(typeof(PlanetShoesDbContext))]
-    [Migration("20250102075314_CriaBancoDeDados")]
-    partial class CriaBancoDeDados
+    [Migration("20250103153130_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,41 @@ namespace PlanetShoes.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.MateriaPrima", b =>
+                {
+                    b.Property<string>("IdMateriaPrima")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Classe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImgMateriaPrima")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UnidadeMedida")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdMateriaPrima");
+
+                    b.ToTable("MateriasPrimas");
+                });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Usuario", b =>
                 {

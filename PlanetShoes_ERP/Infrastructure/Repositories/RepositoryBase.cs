@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-
-namespace PlanetShoes_ADD.Repositories
+﻿namespace PlanetShoes_ADD.Repositories
 {
     public abstract class RepositoryBase
     {

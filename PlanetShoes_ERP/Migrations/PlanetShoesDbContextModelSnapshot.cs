@@ -21,6 +21,41 @@ namespace PlanetShoes.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.MateriaPrima", b =>
+                {
+                    b.Property<string>("IdMateriaPrima")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Classe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImgMateriaPrima")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UnidadeMedida")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdMateriaPrima");
+
+                    b.ToTable("MateriasPrimas");
+                });
+
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Usuario", b =>
                 {
                     b.Property<string>("UserId")
@@ -48,7 +83,7 @@ namespace PlanetShoes.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a94a15ed-b221-4c25-a7a9-0f39967b38e7",
+                            UserId = "9d340277-2ced-4037-84f4-c6fc2cba5579",
                             DisplayName = "Inacio Felipe Couto Ferreira",
                             Email = "inacio.felipe@planetshoes.com",
                             Password = "inacio",
@@ -56,7 +91,7 @@ namespace PlanetShoes.Migrations
                         },
                         new
                         {
-                            UserId = "e51e4542-b8d1-485e-918c-f7a768ecf91e",
+                            UserId = "f9921ce6-ff36-4757-b3be-a7c7e53c45a2",
                             DisplayName = "Luciano Antônio Ferreira",
                             Email = "luciano.ferreira@planetshoes.com",
                             Password = "luciano",

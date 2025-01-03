@@ -17,8 +17,8 @@ namespace PlanetShoes.Migrations
                 columns: new[] { "UserId", "DisplayName", "Email", "Password", "ProfilePicture", "Username" },
                 values: new object[,]
                 {
-                    { "a94a15ed-b221-4c25-a7a9-0f39967b38e7", "Inacio Felipe Couto Ferreira", "inacio.felipe@planetshoes.com", "inacio", null, "Inacio" },
-                    { "e51e4542-b8d1-485e-918c-f7a768ecf91e", "Luciano Antônio Ferreira", "luciano.ferreira@planetshoes.com", "luciano", null, "Luciano" }
+                    { "9d340277-2ced-4037-84f4-c6fc2cba5579", "Inacio Felipe Couto Ferreira", "inacio.felipe@planetshoes.com", "inacio", null, "Inacio" },
+                    { "f9921ce6-ff36-4757-b3be-a7c7e53c45a2", "Luciano Antônio Ferreira", "luciano.ferreira@planetshoes.com", "luciano", null, "Luciano" }
                 });
         }
 
@@ -28,12 +28,12 @@ namespace PlanetShoes.Migrations
             migrationBuilder.DeleteData(
                 table: "Usuarios",
                 keyColumn: "UserId",
-                keyValue: "a94a15ed-b221-4c25-a7a9-0f39967b38e7");
+                keyValue: "9d340277-2ced-4037-84f4-c6fc2cba5579");
 
             migrationBuilder.DeleteData(
                 table: "Usuarios",
                 keyColumn: "UserId",
-                keyValue: "e51e4542-b8d1-485e-918c-f7a768ecf91e");
+                keyValue: "f9921ce6-ff36-4757-b3be-a7c7e53c45a2");
         }
     }
 }

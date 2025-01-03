@@ -3,13 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PlanetShoes.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Tela de Matéria Prima" 
-                   Foreground="White" 
-                   FontSize="24" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Formulário de entrada de dados -->
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="Código" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtCodigo" Style="{StaticResource FormStyle}" IsEnabled="False"/>
+
+            <TextBlock Text="Nome" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtNome" Style="{StaticResource FormStyle}"/>
+
+            <TextBlock Text="Classe" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtClasse" Style="{StaticResource FormStyle}"/>
+
+            <TextBlock Text="Descrição" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtDescricao" Style="{StaticResource FormStyle}"/>
+
+            <TextBlock Text="Unidade de Medida" Style="{StaticResource TextFormStyle}"/>
+            <ComboBox x:Name="cmbUnidadeMedida" 
+                      DisplayMemberPath="Value" SelectedValuePath="Key"/>
+
+            <TextBlock Text="Valor" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtValor" Style="{StaticResource FormStyle}"/>
+
+            <TextBlock Text="Valor Unitário" Style="{StaticResource TextFormStyle}"/>
+            <TextBox x:Name="txtValorUnitario" Style="{StaticResource FormStyle}"/>
+        </StackPanel>
+
+        <!-- Grid para exibição dos dados -->
+        <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" ItemsSource="{Binding MateriasPrimas}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}"/>
+                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
+                <DataGridTextColumn Header="Classe" Binding="{Binding Classe}"/>
+                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}"/>
+                <DataGridTextColumn Header="Unidade de Medida" Binding="{Binding UnidadeMedida}"/>
+                <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding ValorUnitario}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Botões de CRUD -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="btnNovo" Content="Novo" Style="{StaticResource CRUDButton}" Command="{Binding NovoCommand}"/>
+            <Button x:Name="btnEditar" Content="Editar" Style="{StaticResource CRUDButton}" Command="{Binding EditarCommand}"/>
+            <Button x:Name="btnSalvar" Content="Salvar" Style="{StaticResource CRUDButton}" Command="{Binding SalvarCommand}"/>
+            <Button x:Name="btnExcluir" Content="Excluir" Style="{StaticResource CRUDButton}" Command="{Binding ExcluirCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

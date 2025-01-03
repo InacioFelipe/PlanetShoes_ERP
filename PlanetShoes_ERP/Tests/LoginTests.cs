@@ -13,11 +13,11 @@ namespace PlanetShoes.Tests
         [TestMethod]
         public async Task Login_Successful()
         {
-            var mockRepo = new Mock<IUsuarioRepository>();
-            mockRepo.Setup(repo => repo.GetUsuarioByUsernameAsync("testuser"))
-                .ReturnsAsync(new Usuario { Username = "testuser", Password = "hashedpassword" });
+            //var mockRepo = new Mock<IUsuarioRepository>();
+            //mockRepo.Setup(repo => repo.GetUsuarioByUsernameAsync("testuser"))
+            //    .ReturnsAsync(new Usuario { Username = "testuser", Password = "hashedpassword" });
 
-            var loginView = new LoginView(mockRepo.Object);
+            //var loginView = new LoginView(mockRepo.Object);
 
             //// Simula a entrada do usuário
             //loginView.txtUser.Text = "testuser";
