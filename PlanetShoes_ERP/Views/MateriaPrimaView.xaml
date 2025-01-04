@@ -8,55 +8,195 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+        
+        <!-- BANCO DE DADOS -->
+        <Grid Grid.Row="0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
-        <!-- Formulário de entrada de dados -->
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock Text="Código" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtCodigo" Style="{StaticResource FormStyle}" IsEnabled="False"/>
+                <!-- Formulário de entrada de dados -->
+                <Grid Grid.Row="0" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-            <TextBlock Text="Nome" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtNome" Style="{StaticResource FormStyle}"/>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <!-- <TextBlock Text="Cadastro de Matéria Prima" Style="{StaticResource TitleStyle}"/> -->
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <!-- Campo Id (desabilitado) -->
+                                <TextBlock Text="ID:" Style="{StaticResource TextFormStyle}" />
+                                <TextBox x:Name="txtId"
+                                Text="{Binding MateriaPrimaSelecionada.IdMateriaPrima, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}" 
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-            <TextBlock Text="Classe" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtClasse" Style="{StaticResource FormStyle}"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Código:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtCodigo"
+                                Text="{Binding MateriaPrimaSelecionada.Codigo, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-            <TextBlock Text="Descrição" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtDescricao" Style="{StaticResource FormStyle}"/>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Nome:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtNome"
+                                Text="{Binding MateriaPrimaSelecionada.Nome, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-            <TextBlock Text="Unidade de Medida" Style="{StaticResource TextFormStyle}"/>
-            <ComboBox x:Name="cmbUnidadeMedida" 
-                      DisplayMemberPath="Value" SelectedValuePath="Key"/>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Classe:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtClasse"
+                                Text="{Binding MateriaPrimaSelecionada.Classe, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-            <TextBlock Text="Valor" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtValor" Style="{StaticResource FormStyle}"/>
+                        <Grid Grid.Row="2" Grid.Column="0">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Descrição:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtDescricao"
+                                Text="{Binding MateriaPrimaSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-            <TextBlock Text="Valor Unitário" Style="{StaticResource TextFormStyle}"/>
-            <TextBox x:Name="txtValorUnitario" Style="{StaticResource FormStyle}"/>
-        </StackPanel>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Unidade de Medida:" Style="{StaticResource TextFormStyle}"/>
+                                <ComboBox x:Name="cmbUnidadeMedida"
+                              ItemsSource="{Binding UnidadesDeMedida}"
+                              SelectedValue="{Binding MateriaPrimaSelecionada.UnidadeMedida}"
+                              DisplayMemberPath="Value" SelectedValuePath="Key"/>
+                            </StackPanel>
+                        </Grid>
 
-        <!-- Grid para exibição dos dados -->
-        <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" ItemsSource="{Binding MateriasPrimas}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}"/>
-                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
-                <DataGridTextColumn Header="Classe" Binding="{Binding Classe}"/>
-                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}"/>
-                <DataGridTextColumn Header="Unidade de Medida" Binding="{Binding UnidadeMedida}"/>
-                <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
-                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding ValorUnitario}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                        <Grid Grid.Row="3" Grid.Column="0">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Valor:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtValor"
+                                Text="{Binding MateriaPrimaSelecionada.Valor, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
 
-        <!-- Botões de CRUD -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button x:Name="btnNovo" Content="Novo" Style="{StaticResource CRUDButton}" Command="{Binding NovoCommand}"/>
-            <Button x:Name="btnEditar" Content="Editar" Style="{StaticResource CRUDButton}" Command="{Binding EditarCommand}"/>
-            <Button x:Name="btnSalvar" Content="Salvar" Style="{StaticResource CRUDButton}" Command="{Binding SalvarCommand}"/>
-            <Button x:Name="btnExcluir" Content="Excluir" Style="{StaticResource CRUDButton}" Command="{Binding ExcluirCommand}"/>
-        </StackPanel>
+                        <Grid Grid.Row="3" Grid.Column="1">
+                            <StackPanel Orientation="Vertical" Margin="3">
+                                <TextBlock Text="Valor Unitário:" Style="{StaticResource TextFormStyle}"/>
+                                <TextBox x:Name="txtValorUnitario"
+                                  Text="{Binding MateriaPrimaSelecionada.ValorUnitario, UpdateSourceTrigger=PropertyChanged, FallbackValue=''}"
+                                  Style="{StaticResource DynamicBorderTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <!-- Grid para exibição dos dados -->
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <DataGrid Grid.Row="1" Margin="3" AutoGenerateColumns="False"
+                          ItemsSource="{Binding MateriasPrimas}"
+                          SelectedItem="{Binding MateriaPrimaSelecionada, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Header="Id" Binding="{Binding IdMateriaPrima}"/>-->
+                            <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
+                            <DataGridTextColumn Header="Classe" Binding="{Binding Classe}"/>
+                            <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}"/>
+                            <DataGridTextColumn Header="Unidade de Medida" Binding="{Binding UnidadeMedida}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                            <DataGridTextColumn Header="Valor Unitário" Binding="{Binding ValorUnitario}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!-- Botões de CRUD -->
+                <Grid Grid.Row="2" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
+                        <Button x:Name="btnNovo" Content="Novo" Style="{StaticResource CRUDButton}" Command="{Binding NovoCommand}"/>
+                        <Button x:Name="btnEditar" Content="Editar" Style="{StaticResource CRUDButton}" Command="{Binding EditarCommand}"/>
+                        <Button x:Name="btnSalvar" Content="Salvar" Style="{StaticResource CRUDButton}" Command="{Binding SalvarCommand}"/>
+                        <Button x:Name="btnExcluir" Content="Excluir" Style="{StaticResource CRUDButton}" Command="{Binding ExcluirCommand}"/>
+                        <Button x:Name="btnImportarExcel" Content="Importar Excel" Style="{StaticResource CRUDButton}" Command="{Binding ImportarExcelCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    
+        <!-- FILTRO -->
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Campos de Filtro -->
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Filtro por Código -->
+                        <StackPanel Orientation="Vertical" Margin="3" HorizontalAlignment="Center">
+                            <TextBlock Text="Código:" Style="{StaticResource TextFormStyle}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox Text="{Binding FiltroCodigo, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource FormStyle}" Width="200"/>
+                        </StackPanel>
+                        
+                        <!-- Filtro por Descrição -->
+                        <StackPanel Orientation="Vertical" Margin="3" HorizontalAlignment="Center">
+                            <TextBlock Text="Descrição:" Style="{StaticResource TextFormStyle}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox Text="{Binding FiltroDescricao, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource FormStyle}" Width="200"/>
+                    </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Grid para exibir os dados filtrados -->
+                <Grid Grid.Row="1">
+                    <DataGrid Grid.Row="1" x:Name="dtg_DadosFiltrados" ItemsSource="{Binding MateriasPrimasFiltradas}" AutoGenerateColumns="False" Margin="3">
+                        <DataGrid.Style>
+                            <Style TargetType="DataGrid">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <!-- Visível por padrão -->
+                                <Style.Triggers>
+                                    <!-- Se a coleção estiver vazia, oculta a DataGrid -->
+                                    <DataTrigger Binding="{Binding MateriasPrimasFiltradas.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Style>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Código" Binding="{Binding Codigo}"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
+                            <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}"/>
+                            <DataGridTextColumn Header="Unidade de Medida" Binding="{Binding UnidadeMedida}"/>
+                            <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
+    
 </UserControl>

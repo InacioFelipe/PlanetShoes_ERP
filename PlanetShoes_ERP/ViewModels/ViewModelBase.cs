@@ -9,7 +9,7 @@ namespace PlanetShoes.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Método para notificar a View sobre mudanças nas propriedades
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

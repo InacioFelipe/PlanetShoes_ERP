@@ -6,7 +6,7 @@ namespace PlanetShoes.Infrastructure.Data
     public class MateriaPrima
     {
         [Key]
-        public string? IdMateriaPrima { get; set; } //= Guid.NewGuid().ToString();
+        public string? IdMateriaPrima { get; set; } = Guid.NewGuid().ToString();
 
         public int Codigo { get; set; }
         public string? Nome { get; set; }

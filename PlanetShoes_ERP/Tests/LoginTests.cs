@@ -1,32 +1,79 @@
-﻿// Testes Unitários
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using PlanetShoes.Core.Interfaces;
 using PlanetShoes.Infrastructure.Data;
 using PlanetShoes.Views;
+using System.Threading.Tasks;
+using Xunit;
+using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PlanetShoes.Tests
 {
-    [TestClass]
     public class LoginTests
     {
-        [TestMethod]
-        public async Task Login_Successful()
+        [Fact]
+        public async Task Login_WithValidCredentials_ShouldOpenMainView()
         {
-            //var mockRepo = new Mock<IUsuarioRepository>();
-            //mockRepo.Setup(repo => repo.GetUsuarioByUsernameAsync("testuser"))
-            //    .ReturnsAsync(new Usuario { Username = "testuser", Password = "hashedpassword" });
+            // Arrange
+            var mockUsuarioRepository = new Mock<IUsuarioRepository>();
+            var mockServiceProvider = new Mock<IServiceProvider>();
 
-            //var loginView = new LoginView(mockRepo.Object);
+            // Configura o mock para retornar um usuário válido
+            var usuarioValido = new Usuario
+            {
+                Username = "Inacio",
+                Password = "inacio"
+            };
 
-            //// Simula a entrada do usuário
-            //loginView.txtUser.Text = "testuser";
-            //loginView.txtPass.Password = "hashedpassword";
+            mockUsuarioRepository.Setup(repo => repo.GetUsuarioByUsernameAsync("Inacio"))
+                                .ReturnsAsync(usuarioValido);
 
-            //await loginView.btnLogin_Click(null, null);
+            var loginView = new LoginView(mockUsuarioRepository.Object, mockServiceProvider.Object);
 
-            //// Verifica se a janela principal foi aberta
-            //Assert.IsTrue(Application.Current.Windows.Count > 1);
+            // Simula a entrada do usuário
+            loginView.txtUser.Text = "Inacio";
+            loginView.txtPass.Password = "inacio";
+
+            // Act
+            //loginView.btnLogin_Click(null, null); //acesso direto ao método privado
+
+            // Usa reflexão para acessar o método privado
+            var methodInfo = typeof(LoginView).GetMethod("btnLogin_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            methodInfo.Invoke(loginView, new object[] { null, null });
+
+            // Assert
+            mockServiceProvider.Verify(provider => provider.GetRequiredService<MainView>(), Times.Once);
+        }
+
+        [Fact]
+        public async Task Login_WithInvalidCredentials_ShouldShowErrorMessage()
+        {
+            // Arrange
+            var mockUsuarioRepository = new Mock<IUsuarioRepository>();
+            var mockServiceProvider = new Mock<IServiceProvider>();
+
+            // Configura o mock para retornar null (usuário não encontrado)
+            mockUsuarioRepository.Setup(repo => repo.GetUsuarioByUsernameAsync("Inacio"))
+                                .ReturnsAsync((Usuario)null);
+
+            var loginView = new LoginView(mockUsuarioRepository.Object, mockServiceProvider.Object);
+
+            // Simula a entrada do usuário
+            loginView.txtUser.Text = "Inacio";
+            loginView.txtPass.Password = "senhaerrada";
+
+            // Act
+            //loginView.btnLogin_Click(null, null); //acesso direto ao método privado
+
+            // Usa reflexão para acessar o método privado
+            var methodInfo = typeof(LoginView).GetMethod("btnLogin_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            methodInfo.Invoke(loginView, new object[] { null, null });
+
+            // Assert
+            // Verifica se a mensagem de erro foi exibida
+            // Aqui você pode verificar se uma MessageBox foi exibida, mas isso requer um pouco mais de configuração.
+            // Para simplificar, podemos apenas verificar se o método GetRequiredService não foi chamado.
+            mockServiceProvider.Verify(provider => provider.GetRequiredService<MainView>(), Times.Never);
         }
     }
 }

@@ -121,12 +121,10 @@
         <Setter Property="Foreground" Value="{StaticResource plainTextColor1}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Regular"/>
     </Style>
-
 
     <!--Etc-->
 
-    
 </ResourceDictionary>

@@ -88,10 +88,10 @@
     <!--Control CRUD button-->
     <Style x:Key="CRUDButton" TargetType="Button">
         <!--Normal button style-->
-        <Setter Property="Width" Value="auto"/>
-        <Setter Property="MinWidth" Value="50"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Margin" Value="2.5"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="MinWidth" Value="60"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Margin" Value="3"/>
         <Setter Property="Background" Value="{StaticResource Solidcolor3}"/>
         <Setter Property="Foreground" Value="{StaticResource plainTextColor4}"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
@@ -99,8 +99,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                        CornerRadius="4">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="4" Padding="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>

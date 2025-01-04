@@ -11,8 +11,8 @@ using PlanetShoes.Infrastructure.Data;
 namespace PlanetShoes.Migrations
 {
     [DbContext(typeof(PlanetShoesDbContext))]
-    [Migration("20250103153856_InsereUsuarios")]
-    partial class InsereUsuarios
+    [Migration("20250103214640_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

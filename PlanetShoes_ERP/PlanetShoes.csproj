@@ -6,9 +6,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <StartupObject>PlanetShoes.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.5.2" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
@@ -21,8 +23,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

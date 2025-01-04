@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using PlanetShoes.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PlanetShoes.Views
 {
@@ -10,6 +12,14 @@ namespace PlanetShoes.Views
         public MateriaPrimaView()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MateriaPrimaViewModel viewModel)
+            {
+                viewModel.CampoEmFoco = false; // Indica que o campo perdeu o foco
+            }
         }
     }
 }
