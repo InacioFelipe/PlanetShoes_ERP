@@ -2,8 +2,9 @@
 using System.IO;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using PlanetShoes.Helpers;
 
-namespace PlanetShoes.Utils
+namespace PlanetShoes.Helpers
 {
     public static class ImageHelper
     {

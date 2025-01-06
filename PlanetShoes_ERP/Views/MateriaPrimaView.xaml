@@ -8,12 +8,21 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+
+        <!-- Cabecalho -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Border Style="{StaticResource FooterStyle}">
+                <TextBlock Text="Cadastro de Materia Prima:"
+                Style="{StaticResource Title2HeaderStyle}"/>
+            </Border>
+        </Grid>
         
         <!-- BANCO DE DADOS -->
-        <Grid Grid.Row="0" VerticalAlignment="Top">
+        <Grid Grid.Row="1" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"/>
@@ -144,7 +153,7 @@
         </Grid>
     
         <!-- FILTRO -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>

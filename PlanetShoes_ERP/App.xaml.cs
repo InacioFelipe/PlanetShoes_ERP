@@ -32,8 +32,12 @@ namespace PlanetShoes
             services.AddDbContext<PlanetShoesDbContext>();
 
             // Registra os repositórios
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>(); // Adicionado
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
+            services.AddScoped<IPecaCabedalRepository, PecaCabedalRepository>();
+
+            // Registra os ViewModels
+            services.AddTransient<CabedalViewModel>();
 
             // Registra as views
             services.AddTransient<LoginView>();

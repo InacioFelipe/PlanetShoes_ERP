@@ -11,31 +11,38 @@
                 <ResourceDictionary Source="/Styles/TextboxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:MateriaPrimaViewModel}">
-                <local:MateriaPrimaView/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:AcabadoViewModel}">
                 <local:AcabadoView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewModel:AviamentoViewModel}">
                 <local:AviamentoView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:SoladoViewModel}">
-                <local:SoladoView/>
-            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewModel:CabedalViewModel}">
                 <local:CabedalView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:FichaTecnicaViewModel}">
-                <local:FichaTecnicaView/>
-            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <local:DashboaardView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:FichaTecnicaViewModel}">
+                <local:FichaTecnicaView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:MateriaPrimaViewModel}">
+                <local:MateriaPrimaView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:ManualMontagemViewModel}">
                 <local:ManualMontagemView/>
             </DataTemplate>
-
+            
+            <DataTemplate DataType="{x:Type viewModel:SoladoViewModel}">
+                <local:SoladoView/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

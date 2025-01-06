@@ -7,10 +7,48 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Tela de Solado" 
-               Foreground="White" 
-               FontSize="24" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabecalho -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Border Style="{StaticResource FooterStyle}">
+                <TextBlock Text="Cadastro de Solado:"
+        Style="{StaticResource Title2HeaderStyle}"/>
+            </Border>
+        </Grid>
+
+        <!-- Conteudo -->
+        <Grid Grid.Row="1" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Rodapé -->
+        <Grid Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+
+                </Grid>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

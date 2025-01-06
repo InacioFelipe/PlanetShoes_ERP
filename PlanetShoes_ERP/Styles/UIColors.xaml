@@ -109,10 +109,21 @@
     <Style x:Key="Title1HeaderStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource Solidcolor2}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize"  Value="18"/>
+    </Style>
+
+    <Style x:Key="Title2HeaderStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource Solidcolor11}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize"  Value="18"/>
     </Style>
 
     <Style x:Key="TextFormStyle" TargetType="TextBlock">

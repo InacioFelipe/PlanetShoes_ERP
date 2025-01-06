@@ -7,10 +7,305 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Tela de Cabedal" 
-               Foreground="White" 
-               FontSize="24" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Dados de Cabedal -->
+        <Grid Grid.Row="0" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Cabecalho -->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Border Style="{StaticResource FooterStyle}">
+                    <TextBlock Text="Cadastro de Cabedais:"
+                    Style="{StaticResource Title2HeaderStyle}"/>
+                </Border>
+            </Grid>
+            
+            <!-- Formulario Cabedal -->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!-- Id Cabedal -->
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Id Cabedal:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.ID, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Código -->
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Código:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.Codigo, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Descrição -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Nome:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Classe:" Style="{StaticResource TextFormStyle}"/>
+                        <ComboBox Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Consumo / Valor Matérias-Primas / Valor Processos -->
+                <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Consumo -->
+                        <StackPanel Margin="3">
+                            <TextBlock Text="Consumo:" Style="{StaticResource TextFormStyle}"/>
+                            <TextBox Text="{Binding PecaCabedalSelecionada.Consumo, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource FormStyle}"/>
+                        </StackPanel>
+
+                        <!-- Valor Matérias-Primas -->
+                        <StackPanel Margin="3">
+                            <TextBlock Text="Valor Matérias-Primas:" Style="{StaticResource TextFormStyle}"/>
+                            <TextBox Text="{Binding PecaCabedalSelecionada.ValorMateriasPrimas, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                        </StackPanel>
+
+                        <!-- Valor Processos -->
+                        <StackPanel Margin="3">
+                            <TextBlock Text="Valor Processos:" Style="{StaticResource TextFormStyle}"/>
+                            <TextBox Text="{Binding PecaCabedalSelecionada.ValorProcessos, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource FormStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            
+            <!-- Lista de Peças do Cabedal -->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Lista de Peças -->
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <DataGrid ItemsSource="{Binding PecasCabedal}" AutoGenerateColumns="True">
+
+                    </DataGrid>
+                </Grid>
+
+                <!-- Botoes -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button Style="{StaticResource CRUDButton}" Content="+"  Margin="5"></Button>
+                        <Button Style="{StaticResource CRUDButton}" Content="-"  Margin="5"></Button>
+                        <Button Style="{StaticResource CRUDButton}" Content="/"  Margin="5"></Button>
+                        <Button Style="{StaticResource CRUDButton}" Content="Import DXF"  Margin="5"></Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Dados das Peças -->
+        <Grid Grid.Row="2" Margin="3,10,3,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Cabecalho -->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Border Style="{StaticResource FooterStyle}">
+                    <TextBlock Text="Dados das peças:"
+                    Style="{StaticResource Title2HeaderStyle}"/>
+                </Border>
+            </Grid>
+            
+            <!-- Formulario Peças -->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Nome do Modelo -->
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="3">
+                    <TextBlock Text="Nome do Modelo:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.NomeModelo, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+
+                <!-- Nome da Peça -->
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="3">
+                    <TextBlock Text="Nome da Peça:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.NomePeca, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+
+                <!-- Tamanho / Quantidades / Categoria -->
+                <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.ColumnSpan="2">
+                    <!-- Tamanho -->
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Tamanho:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.Tamanho, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+
+                    <!-- Quantidades -->
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Quantidades:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.Quantidades, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+
+                    <!-- Categoria -->
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Categoria:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox Text="{Binding PecaCabedalSelecionada.Categoria, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Data -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="3">
+                    <TextBlock Text="Data:" Style="{StaticResource TextFormStyle}"/>
+                    <DatePicker SelectedDate="{Binding PecaCabedalSelecionada.Data, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Hora -->
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="3">
+                    <TextBlock Text="Hora:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.Hora, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+
+                <!-- Perímetro -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="3">
+                    <TextBlock Text="Perímetro:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.Perimetro, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+
+                <!-- Superfície -->
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="3">
+                    <TextBlock Text="Superfície:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.Superficie, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+
+                <!-- Informações -->
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="3">
+                    <TextBlock Text="Informações:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox Text="{Binding PecaCabedalSelecionada.Informacoes, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource FormStyle}" Height="60" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <!-- Botões de CRUD -->
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
+                    <Button Content="Novo" Command="{Binding NovoCommand}" Style="{StaticResource CRUDButton}"/>
+                    <Button Content="Editar" Command="{Binding EditarCommand}" Style="{StaticResource CRUDButton}"/>
+                    <Button Content="Salvar" Command="{Binding SalvarCommand}" Style="{StaticResource CRUDButton}"/>
+                    <Button Content="Excluir" Command="{Binding ExcluirCommand}" Style="{StaticResource CRUDButton}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Listas Processos / Materia Prima -->
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Materias Primas -->
+                <Grid Grid.Row="0" Grid.Column="0" Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <DataGrid Grid.Row="0" ItemsSource="{Binding MateriasPrimas}" AutoGenerateColumns="True">
+
+                        </DataGrid>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <Button Style="{StaticResource CRUDButton}" Content="+"  Margin="5"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="-"  Margin="5"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="/"  Margin="5"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!-- Processos -->
+                <Grid Grid.Row="0" Grid.Column="1" Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <DataGrid Grid.Row="0" ItemsSource="{Binding Processos}" AutoGenerateColumns="True">
+
+                        </DataGrid>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <Button Style="{StaticResource CRUDButton}" Content="+"  Margin="5"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="-"  Margin="5"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="/"  Margin="5"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>
