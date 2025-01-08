@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanetShoes.Infrastructure.Context;
 
-
 #nullable disable
 
 namespace PlanetShoes.Migrations
@@ -164,6 +163,27 @@ namespace PlanetShoes.Migrations
                     b.HasDiscriminator().HasValue("Peca");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstrutura", b =>
+                {
+                    b.Property<string>("IdSubEstrutura")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Consumo")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdEstrutura")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdSubEstrutura");
+
+                    b.ToTable("SubEstruturas");
                 });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Usuario", b =>

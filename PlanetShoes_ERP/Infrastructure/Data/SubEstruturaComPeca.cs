@@ -12,6 +12,6 @@ namespace PlanetShoes.Infrastructure.Data
     /// </summary>
     public class SubEstruturaComPeca : Estrutura
     {
-        public byte[] ImgSubEstruturaComPeca { get; set; }= new byte[0];
+        public byte[] ImgSubEstruturaComPeca { get; set; } = new byte[0];
     }
 }

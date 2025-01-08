@@ -13,13 +13,5 @@ namespace PlanetShoes.Views
         {
             InitializeComponent();
         }
-
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is MateriaPrimaViewModel viewModel)
-            {
-                viewModel.CampoEmFoco = false; // Indica que o campo perdeu o foco
-            }
-        }
     }
 }

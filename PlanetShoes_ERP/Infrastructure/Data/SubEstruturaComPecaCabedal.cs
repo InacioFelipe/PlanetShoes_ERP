@@ -7,8 +7,10 @@ namespace PlanetShoes.Infrastructure.Data
     /// </summary>
     public class SubEstruturaComPecaCabedal : SubEstruturaComPeca
     {
+        
         public DesignCabedal DesignCabedal { get; set; }
         public TipoEstruturaCabedal EstruturaCabedal { get; set; }
-        public List<Peca> Pecas { get; set; } = new List<Peca>();
+
+        public List<Peca>Pecas { get; set; }
     }
 }

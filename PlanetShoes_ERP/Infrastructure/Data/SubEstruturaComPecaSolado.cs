@@ -7,9 +7,11 @@ namespace PlanetShoes.Infrastructure.Data
     /// </summary>
     public class SubEstruturaComPecaSolado : SubEstruturaComPeca
     {
+       
         public AlturaSolado AlturaSolado { get; set; }
         public DesignSolado DesignSolado { get; set; }
         public TipoEstruturaSolado EstruturaSolado { get; set; }
-        public List<Peca> Pecas { get; set; } = new List<Peca>();
+
+        public List<Peca> Pecas { get; set; }
     }
 }

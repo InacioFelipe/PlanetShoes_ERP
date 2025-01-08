@@ -51,6 +51,7 @@ namespace PlanetShoes.Infrastructure.Context
                 .HasValue<SubEstruturaComPecaSolado>("ComPecaSolado")
                 .HasValue<SubEstruturaComPecaCabedal>("ComPecaCabedal");
 
+
             // Inserção de dados iniciais
             InsereUsuarios(modelBuilder);
             InsereMateriaPrima(modelBuilder);

@@ -81,6 +81,16 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource Solidcolor10}"
+                                 Command="{Binding ShowEstruturaViewCommand}">
+                        <!-- Comando para navegar -->
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="LayerGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Estrutura" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
                          Tag="{StaticResource Solidcolor9}"
                          Command="{Binding ShowCabedalViewCommand}">
                         <!-- ALTERAR AQUI -->

@@ -35,17 +35,26 @@ namespace PlanetShoes
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
             services.AddScoped<IPecaCabedalRepository, PecaCabedalRepository>();
+            services.AddScoped<IEstruturaRepository, EstruturaRepository>();
+
 
             // Registra os ViewModels
+            services.AddTransient<MainViewModel>(
+                provider => new MainViewModel(
+                    provider.GetRequiredService<IMateriaPrimaRepository>(),
+                    provider.GetRequiredService<IEstruturaRepository>() // Adicionado
+                ));
+
+            // Registra os ViewModels
+            services.AddTransient<MateriaPrimaViewModel>();
+            services.AddTransient<EstruturaViewModel>();
             services.AddTransient<CabedalViewModel>();
 
             // Registra as views
             services.AddTransient<LoginView>();
             services.AddTransient<MainView>();
+            services.AddTransient<EstruturaView>();
 
-            // Registra os ViewModels
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<MateriaPrimaViewModel>();
         }
     }
 }

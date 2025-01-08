@@ -42,7 +42,11 @@
             <DataTemplate DataType="{x:Type viewModel:SoladoViewModel}">
                 <local:SoladoView/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type viewModel:EstruturaViewModel}">
+                <local:EstruturaView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
