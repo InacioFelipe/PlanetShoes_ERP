@@ -1,6 +1,7 @@
 ﻿using PlanetShoes.Core.Interfaces;
 using PlanetShoes.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using PlanetShoes.Infrastructure.Context;
 
 namespace PlanetShoes.Infrastructure.Repositories
 {

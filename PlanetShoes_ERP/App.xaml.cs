@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlanetShoes.Core.Interfaces;
-using PlanetShoes.Infrastructure.Data;
 using PlanetShoes.Infrastructure.Repositories;
 using PlanetShoes.Views;
 using PlanetShoes.ViewModels;
 using System.Windows;
+using PlanetShoes.Infrastructure.Context;
 
 namespace PlanetShoes
 {

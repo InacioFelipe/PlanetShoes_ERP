@@ -8,12 +8,18 @@ namespace PlanetShoes.Infrastructure.Data
     /// </summary>
     public class Peca
     {
-        [Key] // Chave primária
-        public string IdPeca { get; set; } = Guid.NewGuid().ToString(); // ID gerado por GUID
-        public string Nome { get; set; }
-        public string Descricao { get; set; }
-        public byte[] Imagem { get; set; } = Array.Empty<byte>(); // Vetor de bytes para a imagem
+        [Key]
+        public string IdPeca { get; set; } 
+
         public AgrupamentoPeca Agrupamento { get; set; }
+        public int Codigo { get; set; }
+        public float Consumo { get; set; }
+        public string Descricao { get; set; }
+        public byte[] ImgPeca { get; set; } = new byte[0];
+        public string Nome { get; set; }
         public TamanhoPeca Tamanho { get; set; }
+
+        // Relacionamento com Materia Prima
+        public string IdMateriaPrima { get; set; }
     }
 }
