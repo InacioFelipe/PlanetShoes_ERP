@@ -31,14 +31,14 @@
                 <local:FichaTecnicaView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:MateriaPrimaViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewModel:MateriaPrimaViewModel}">
                 <local:MateriaPrimaView/>
-            </DataTemplate>
+            </DataTemplate>-->
 
             <DataTemplate DataType="{x:Type viewModel:ManualMontagemViewModel}">
                 <local:ManualMontagemView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:SoladoViewModel}">
                 <local:SoladoView/>
             </DataTemplate>

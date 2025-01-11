@@ -9,7 +9,15 @@ namespace PlanetShoes.Infrastructure.Data
     public class Estrutura
     {
         [Key]
-        public string IdEstrutura { get; set; } 
-        public string IdSubEstrutura { get; set; } 
+        public string IdEstrutura { get; set; }
+
+        public string IdSubEstrutura { get; set; }
+        public string TipoEstrutura { get; set; }
+
+
+        // Propriedades de navegação para as subestruturas
+        public List<SubEstruturaAcabado> SubEstruturasAcabado { get; set; } = new List<SubEstruturaAcabado>();
+        public List<SubEstruturaAviamento> SubEstruturasAviamento { get; set; } = new List<SubEstruturaAviamento>();
+        public List<SubEstruturaComPeca> SubEstruturasComPeca { get; set; } = new List<SubEstruturaComPeca>();
     }
 }

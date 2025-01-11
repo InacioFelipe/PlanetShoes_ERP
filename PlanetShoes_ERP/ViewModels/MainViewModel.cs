@@ -8,9 +8,10 @@ namespace PlanetShoes.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IMateriaPrimaRepository _materiaPrimaRepository;
+
         private readonly IPecaCabedalRepository _pecaCabedalRepository;
         private readonly IEstruturaRepository _estruturaRepository;
+        private readonly IPecaRepository _pecaRepository;
 
         private ViewModelBase _currentChildView;
 
@@ -24,10 +25,10 @@ namespace PlanetShoes.ViewModels
         public ICommand ShowManualMontagemViewCommand { get; }
         public ICommand ShowEstruturaViewCommand { get; }
 
-        public MainViewModel(IMateriaPrimaRepository materiaPrimaRepository, IEstruturaRepository estruturaRepository)
+        public MainViewModel(IEstruturaRepository estruturaRepository, IPecaRepository pecaRepository)
         {
-            _materiaPrimaRepository = materiaPrimaRepository;
             _estruturaRepository = estruturaRepository;
+            _pecaRepository = pecaRepository;
 
             ShowMateriaPrimaViewCommand = new RelayCommand(ExecuteShowMateriaPrimaViewCommand);
             ShowAcabadoViewCommand = new RelayCommand(ExecuteShowAcabadoViewCommand);
@@ -50,7 +51,7 @@ namespace PlanetShoes.ViewModels
         //Navegação
         private void ExecuteShowMateriaPrimaViewCommand(object obj)
         {
-            CurrentChildView = new MateriaPrimaViewModel(_materiaPrimaRepository);
+            
         }
         private void ExecuteShowAcabadoViewCommand(object obj)
         {
@@ -66,7 +67,7 @@ namespace PlanetShoes.ViewModels
         }
         private void ExecuteShowCabedalViewCommand(object obj)
         {
-            CurrentChildView = new CabedalViewModel();
+            CurrentChildView = new CabedalViewModel(_estruturaRepository, _pecaRepository);
         }
 
         private void ExecuteShowFichaTecnicaViewCommand(object obj)
@@ -84,7 +85,7 @@ namespace PlanetShoes.ViewModels
 
         private void ExecuteShowEstruturaViewCommand(object obj)
         {
-            CurrentChildView = new EstruturaViewModel(_estruturaRepository);
+            CurrentChildView = new EstruturaViewModel(_estruturaRepository, _pecaRepository);
         }
     }
 }

@@ -1,26 +1,43 @@
-﻿using PlanetShoes.Core.Commands;
-using PlanetShoes.Core.Interfaces;
-using PlanetShoes.Infrastructure.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace PlanetShoes.ViewModels
 {
+    using PlanetShoes.Core.Commands;
+    using PlanetShoes.Core.Enums;
+    using PlanetShoes.Core.Interfaces;
+    using PlanetShoes.Infrastructure.Data;
+    using PlanetShoes.Infrastructure.Repositories;
+    using PlanetShoes.ViewModels;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
+
     public class EstruturaViewModel : ViewModelBase
     {
         private readonly IEstruturaRepository _estruturaRepository;
-
-
-        // Comandos
-        public ICommand CarregarEstruturasCommand { get; }
-        public ICommand SalvarEstruturaCommand { get; }
+        private readonly IPecaRepository _pecaRepository;
+        
+        // Commands
+        public ICommand AdicionarEstruturaCommand { get; }
         public ICommand EditarEstruturaCommand { get; }
         public ICommand ExcluirEstruturaCommand { get; }
+        public ICommand CarregarPecasPorTipoCommand { get; }
 
+
+        // Construtor
+        public EstruturaViewModel(IEstruturaRepository estruturaRepository,
+                                  IPecaRepository pecaRepository)
+        {
+            _estruturaRepository = estruturaRepository ?? throw new ArgumentNullException(nameof(estruturaRepository));
+            _pecaRepository = pecaRepository ?? throw new ArgumentNullException(nameof(pecaRepository));
+           
+            CarregarEstruturas();
+            Pecas = new ObservableCollection<Peca>(); // Inicializa a lista de peças
+        }
 
         // Propriedades
         private List<Estrutura> _estruturas;
@@ -37,63 +54,93 @@ namespace PlanetShoes.ViewModels
             set
             {
                 SetProperty(ref _estruturaSelecionada, value);
-
+                CarregarPecasPorEstruturaSelecionada();
             }
         }
 
-        // Construtor
-        public EstruturaViewModel(IEstruturaRepository estruturaRepository)
+        private Estrutura _estruturaCompleta;
+        public Estrutura EstruturaCompleta
         {
-            _estruturaRepository = estruturaRepository;
-
-            // Carrega as estruturas ao inicializar
-            CarregarEstruturasAsync();
-
-            // Inicializa os comandos
-            CarregarEstruturasCommand = new RelayCommand(async (param) => await CarregarEstruturasAsync());
-            SalvarEstruturaCommand = new RelayCommand(async (param) => await SalvarEstruturaAsync());
-            EditarEstruturaCommand = new RelayCommand(async (param) => await EditarEstruturaAsync());
-            ExcluirEstruturaCommand = new RelayCommand(async (param) => await ExcluirEstruturaAsync());
-
+            get => _estruturaCompleta;
+            set => SetProperty(ref _estruturaCompleta, value);
         }
 
+        private Peca _pecaSelecionada;
+        public Peca PecaSelecionada
+        {
+            get => _pecaSelecionada;
+            set
+            {
+                SetProperty(ref _pecaSelecionada, value);
+            }
+        }
+
+        private MateriaPrima _materiaPrimaDaPeca;
+        public MateriaPrima MateriaPrimaDaPeca
+        {
+            get => _materiaPrimaDaPeca;
+            set => SetProperty(ref _materiaPrimaDaPeca, value);
+        }
+
+
+        // Propriedade para armazenamento
+        private ObservableCollection<MateriaPrima> _materiasPrimas;
+        public ObservableCollection<MateriaPrima> MateriasPrimas
+        {
+            get => _materiasPrimas;
+            set => SetProperty(ref _materiasPrimas, value);
+        }
+
+        private ObservableCollection<Peca> _pecas;
+        public ObservableCollection<Peca> Pecas
+        {
+            get => _pecas;
+            set => SetProperty(ref _pecas, value);
+        }
+
+
+        
         // Métodos
-        private async Task CarregarEstruturasAsync()
+        private async void CarregarEstruturas()
         {
-            Estruturas = await _estruturaRepository.GetAllAsync();
+            Estruturas = await _estruturaRepository.GetAllEstruturasAsync();
         }
 
-        private async Task SalvarEstruturaAsync()
+        private async void CarregarPecasPorEstruturaSelecionada()
         {
-            if (EstruturaSelecionada != null)
+            if (EstruturaSelecionada != null && !string.IsNullOrEmpty(EstruturaSelecionada.IdEstrutura))
             {
-                if (string.IsNullOrEmpty(EstruturaSelecionada.IdEstrutura))
-                {
-                    await _estruturaRepository.AddAsync(EstruturaSelecionada);
-                }
-                else
-                {
-                    await _estruturaRepository.UpdateAsync(EstruturaSelecionada);
-                }
-                await CarregarEstruturasAsync(); // Atualiza a lista após salvar
+                var pecas = await _pecaRepository.GetPecasByEstruturaIdAsync(EstruturaSelecionada.IdEstrutura);
+                Pecas = new ObservableCollection<Peca>(pecas);
+            }
+            else
+            {
+                Pecas.Clear(); // Limpa a lista de peças se nenhuma estrutura estiver selecionada
             }
         }
 
-        private async Task EditarEstruturaAsync()
+        private async void AdicionarEstrutura()
+        {
+            var novaEstrutura = new Estrutura { IdEstrutura = Guid.NewGuid().ToString() };
+            await _estruturaRepository.AddEstruturaAsync(novaEstrutura);
+            CarregarEstruturas();
+        }
+
+        private async void EditarEstrutura()
         {
             if (EstruturaSelecionada != null)
             {
-                await _estruturaRepository.UpdateAsync(EstruturaSelecionada);
-                await CarregarEstruturasAsync(); // Atualiza a lista após editar
+                await _estruturaRepository.UpdateEstruturaAsync(EstruturaSelecionada);
+                CarregarEstruturas();
             }
         }
 
-        private async Task ExcluirEstruturaAsync()
+        private async void ExcluirEstrutura()
         {
             if (EstruturaSelecionada != null)
             {
-                await _estruturaRepository.DeleteAsync(EstruturaSelecionada.IdEstrutura);
-                await CarregarEstruturasAsync(); // Atualiza a lista após excluir
+                await _estruturaRepository.DeleteEstruturaAsync(EstruturaSelecionada.IdEstrutura);
+                CarregarEstruturas();
             }
         }
     }

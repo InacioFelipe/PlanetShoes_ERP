@@ -1,6 +1,5 @@
 ﻿using PlanetShoes.Core.Enums;
 using System.ComponentModel.DataAnnotations;
-
 namespace PlanetShoes.Infrastructure.Data
 {
     /// <summary>
@@ -19,7 +18,14 @@ namespace PlanetShoes.Infrastructure.Data
         public string Nome { get; set; }
         public TamanhoPeca Tamanho { get; set; }
 
+
         // Relacionamento com Materia Prima
         public string IdMateriaPrima { get; set; }
+
+        // Relacionamento com Estrutura
+        public string IdEstrutura { get; set; }
+
+        // Propriedade de navegação
+        public MateriaPrima MateriaPrima { get; set; }
     }
 }

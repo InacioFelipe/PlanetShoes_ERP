@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanetShoes.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using PlanetShoes.Infrastructure.Context;
 namespace PlanetShoes.Migrations
 {
     [DbContext(typeof(PlanetShoesDbContext))]
-    partial class PlanetShoesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250110134750_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,7 +399,7 @@ namespace PlanetShoes.Migrations
                             Codigo = 102,
                             Consumo = 3f,
                             Descricao = "Cabedal sintético",
-                            IdEstrutura = "Estrutura5",
+                            IdEstrutura = "Estrutura6",
                             IdMateriaPrima = "MateriaPrima2",
                             ImgPeca = new byte[0],
                             Nome = "Cabedal 2",
@@ -426,7 +429,7 @@ namespace PlanetShoes.Migrations
                             Codigo = 201,
                             Consumo = 1.5f,
                             Descricao = "Solado de borracha",
-                            IdEstrutura = "Estrutura5",
+                            IdEstrutura = "Estrutura7",
                             IdMateriaPrima = "MateriaPrima2",
                             ImgPeca = new byte[0],
                             Nome = "Solado 1",

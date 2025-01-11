@@ -1,7 +1,9 @@
-﻿using PlanetShoes.Core.Interfaces;
-using PlanetShoes.Infrastructure.Context;
-using PlanetShoes.Infrastructure.Data;
+﻿using PlanetShoes.Infrastructure.Data;
+using PlanetShoes.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using PlanetShoes.Infrastructure.Context;
 
 namespace PlanetShoes.Infrastructure.Repositories
 {
@@ -11,32 +13,32 @@ namespace PlanetShoes.Infrastructure.Repositories
 
         public EstruturaRepository(PlanetShoesDbContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
-        public async Task<List<Estrutura>> GetAllAsync()
+        public async Task<List<Estrutura>> GetAllEstruturasAsync()
         {
             return await _context.Estruturas.ToListAsync();
         }
 
-        public async Task<Estrutura> GetByIdAsync(string id)
+        public async Task<Estrutura> GetEstruturaCompletaAsync(string id)
         {
             return await _context.Estruturas.FindAsync(id);
         }
 
-        public async Task AddAsync(Estrutura estrutura)
+        public async Task AddEstruturaAsync(Estrutura estrutura)
         {
             await _context.Estruturas.AddAsync(estrutura);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Estrutura estrutura)
+        public async Task UpdateEstruturaAsync(Estrutura estrutura)
         {
             _context.Estruturas.Update(estrutura);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteEstruturaAsync(string id)
         {
             var estrutura = await _context.Estruturas.FindAsync(id);
             if (estrutura != null)

@@ -7,14 +7,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanetShoes.Infrastructure.Context;
 
-
 #nullable disable
 
 namespace PlanetShoes.Migrations
 {
     [DbContext(typeof(PlanetShoesDbContext))]
-    [Migration("20250108152618_Inicio")]
-    partial class Inicio
+    [Migration("20250110161434_AddTipoEstruturaToEstrutura")]
+    partial class AddTipoEstruturaToEstrutura
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,13 +46,6 @@ namespace PlanetShoes.Migrations
                     b.HasDiscriminator<string>("TipoEstrutura").HasValue("Estrutura");
 
                     b.UseTphMappingStrategy();
-
-                    b.HasData(
-                        new
-                        {
-                            IdEstrutura = "Estrutura0",
-                            IdSubEstrutura = "SubEstrutura0"
-                        });
                 });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.MateriaPrima", b =>
@@ -135,6 +127,10 @@ namespace PlanetShoes.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
+                    b.Property<string>("IdEstrutura")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("IdMateriaPrima")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -143,30 +139,55 @@ namespace PlanetShoes.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("MateriaPrimaIdMateriaPrima")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubEstruturaComPecaCabedalIdEstrutura")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubEstruturaComPecaSoladoIdEstrutura")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Tamanho")
                         .HasColumnType("int");
 
                     b.HasKey("IdPeca");
 
-                    b.HasIndex("SubEstruturaComPecaCabedalIdEstrutura");
+                    b.HasIndex("IdEstrutura");
 
-                    b.HasIndex("SubEstruturaComPecaSoladoIdEstrutura");
+                    b.HasIndex("MateriaPrimaIdMateriaPrima");
 
                     b.ToTable("Pecas");
 
                     b.HasDiscriminator().HasValue("Peca");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            IdPeca = "PecaGenerica1",
+                            Agrupamento = 0,
+                            Codigo = 301,
+                            Consumo = 1f,
+                            Descricao = "Peça genérica 1",
+                            IdEstrutura = "Estrutura9",
+                            IdMateriaPrima = "MateriaPrima1",
+                            ImgPeca = new byte[0],
+                            Nome = "Peça Genérica 1",
+                            Tamanho = 40
+                        },
+                        new
+                        {
+                            IdPeca = "PecaGenerica2",
+                            Agrupamento = 1,
+                            Codigo = 302,
+                            Consumo = 1.5f,
+                            Descricao = "Peça genérica 2",
+                            IdEstrutura = "Estrutura10",
+                            IdMateriaPrima = "MateriaPrima2",
+                            ImgPeca = new byte[0],
+                            Nome = "Peça Genérica 2",
+                            Tamanho = 42
+                        });
                 });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Usuario", b =>
@@ -219,9 +240,14 @@ namespace PlanetShoes.Migrations
                     b.Property<float>("Consumo")
                         .HasColumnType("real");
 
+                    b.Property<string>("EstruturaIdEstrutura")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<byte[]>("ImgAcabado")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.HasIndex("EstruturaIdEstrutura");
 
                     b.HasDiscriminator().HasValue("Acabado");
 
@@ -231,6 +257,13 @@ namespace PlanetShoes.Migrations
                             IdEstrutura = "Estrutura1",
                             IdSubEstrutura = "SubEstrutura1",
                             Consumo = 10.5f,
+                            ImgAcabado = new byte[0]
+                        },
+                        new
+                        {
+                            IdEstrutura = "Estrutura2",
+                            IdSubEstrutura = "SubEstrutura2",
+                            Consumo = 15f,
                             ImgAcabado = new byte[0]
                         });
                 });
@@ -242,14 +275,22 @@ namespace PlanetShoes.Migrations
                     b.Property<float>("Consumo")
                         .HasColumnType("real");
 
+                    b.Property<string>("EstruturaIdEstrutura")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<byte[]>("ImgAcabado")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.HasIndex("EstruturaIdEstrutura");
 
                     b.ToTable("Estruturas", t =>
                         {
                             t.Property("Consumo")
                                 .HasColumnName("SubEstruturaAviamento_Consumo");
+
+                            t.Property("EstruturaIdEstrutura")
+                                .HasColumnName("SubEstruturaAviamento_EstruturaIdEstrutura");
 
                             t.Property("ImgAcabado")
                                 .HasColumnName("SubEstruturaAviamento_ImgAcabado");
@@ -260,9 +301,16 @@ namespace PlanetShoes.Migrations
                     b.HasData(
                         new
                         {
-                            IdEstrutura = "Estrutura2",
-                            IdSubEstrutura = "SubEstrutura2",
+                            IdEstrutura = "Estrutura3",
+                            IdSubEstrutura = "SubEstrutura3",
                             Consumo = 5f,
+                            ImgAcabado = new byte[0]
+                        },
+                        new
+                        {
+                            IdEstrutura = "Estrutura4",
+                            IdSubEstrutura = "SubEstrutura4",
+                            Consumo = 7.5f,
                             ImgAcabado = new byte[0]
                         });
                 });
@@ -271,11 +319,36 @@ namespace PlanetShoes.Migrations
                 {
                     b.HasBaseType("PlanetShoes.Infrastructure.Data.Estrutura");
 
+                    b.Property<string>("EstruturaIdEstrutura")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<byte[]>("ImgSubEstruturaComPeca")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.HasIndex("EstruturaIdEstrutura");
+
+                    b.ToTable("Estruturas", t =>
+                        {
+                            t.Property("EstruturaIdEstrutura")
+                                .HasColumnName("SubEstruturaComPeca_EstruturaIdEstrutura");
+                        });
+
                     b.HasDiscriminator().HasValue("ComPeca");
+
+                    b.HasData(
+                        new
+                        {
+                            IdEstrutura = "Estrutura9",
+                            IdSubEstrutura = "SubEstrutura9",
+                            ImgSubEstruturaComPeca = new byte[0]
+                        },
+                        new
+                        {
+                            IdEstrutura = "Estrutura10",
+                            IdSubEstrutura = "SubEstrutura10",
+                            ImgSubEstruturaComPeca = new byte[0]
+                        });
                 });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.PecaCabedal", b =>
@@ -303,20 +376,39 @@ namespace PlanetShoes.Migrations
                     b.HasData(
                         new
                         {
-                            IdPeca = "IdPeca2",
-                            Agrupamento = 1,
-                            Codigo = 201,
-                            Consumo = 1f,
+                            IdPeca = "PecaCabedal1",
+                            Agrupamento = 0,
+                            Codigo = 101,
+                            Consumo = 2.5f,
                             Descricao = "Cabedal de couro",
+                            IdEstrutura = "Estrutura5",
                             IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Cabedal 1",
-                            Tamanho = 42,
+                            Tamanho = 40,
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hora = new TimeSpan(0, 0, 0, 0, 0),
                             NomeModelo = "Empire",
-                            Perimetro = 0f,
-                            Superficie = 0f
+                            Perimetro = 50f,
+                            Superficie = 100f
+                        },
+                        new
+                        {
+                            IdPeca = "PecaCabedal2",
+                            Agrupamento = 1,
+                            Codigo = 102,
+                            Consumo = 3f,
+                            Descricao = "Cabedal sintético",
+                            IdEstrutura = "Estrutura5",
+                            IdMateriaPrima = "MateriaPrima2",
+                            ImgPeca = new byte[0],
+                            Nome = "Cabedal 2",
+                            Tamanho = 42,
+                            Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hora = new TimeSpan(0, 0, 0, 0, 0),
+                            NomeModelo = "Modern",
+                            Perimetro = 55f,
+                            Superficie = 110f
                         });
                 });
 
@@ -332,16 +424,31 @@ namespace PlanetShoes.Migrations
                     b.HasData(
                         new
                         {
-                            IdPeca = "IdPeca1",
+                            IdPeca = "PecaSolado1",
                             Agrupamento = 0,
-                            Codigo = 101,
-                            Consumo = 2.5f,
+                            Codigo = 201,
+                            Consumo = 1.5f,
                             Descricao = "Solado de borracha",
+                            IdEstrutura = "Estrutura5",
                             IdMateriaPrima = "MateriaPrima2",
                             ImgPeca = new byte[0],
                             Nome = "Solado 1",
                             Tamanho = 40,
-                            Peso = 0f
+                            Peso = 0.5f
+                        },
+                        new
+                        {
+                            IdPeca = "PecaSolado2",
+                            Agrupamento = 1,
+                            Codigo = 202,
+                            Consumo = 2f,
+                            Descricao = "Solado de EVA",
+                            IdEstrutura = "Estrutura8",
+                            IdMateriaPrima = "MateriaPrima1",
+                            ImgPeca = new byte[0],
+                            Nome = "Solado 2",
+                            Tamanho = 42,
+                            Peso = 0.6f
                         });
                 });
 
@@ -355,16 +462,30 @@ namespace PlanetShoes.Migrations
                     b.Property<int>("EstruturaCabedal")
                         .HasColumnType("int");
 
+                    b.ToTable("Estruturas", t =>
+                        {
+                            t.Property("EstruturaIdEstrutura")
+                                .HasColumnName("SubEstruturaComPeca_EstruturaIdEstrutura");
+                        });
+
                     b.HasDiscriminator().HasValue("ComPecaCabedal");
 
                     b.HasData(
                         new
                         {
-                            IdEstrutura = "Estrutura4",
-                            IdSubEstrutura = "SubEstrutura4",
+                            IdEstrutura = "Estrutura5",
+                            IdSubEstrutura = "SubEstrutura5",
                             ImgSubEstruturaComPeca = new byte[0],
                             DesignCabedal = 2,
                             EstruturaCabedal = 1
+                        },
+                        new
+                        {
+                            IdEstrutura = "Estrutura6",
+                            IdSubEstrutura = "SubEstrutura6",
+                            ImgSubEstruturaComPeca = new byte[0],
+                            DesignCabedal = 1,
+                            EstruturaCabedal = 2
                         });
                 });
 
@@ -381,37 +502,81 @@ namespace PlanetShoes.Migrations
                     b.Property<int>("EstruturaSolado")
                         .HasColumnType("int");
 
+                    b.ToTable("Estruturas", t =>
+                        {
+                            t.Property("EstruturaIdEstrutura")
+                                .HasColumnName("SubEstruturaComPeca_EstruturaIdEstrutura");
+                        });
+
                     b.HasDiscriminator().HasValue("ComPecaSolado");
 
                     b.HasData(
                         new
                         {
-                            IdEstrutura = "Estrutura3",
-                            IdSubEstrutura = "SubEstrutura3",
+                            IdEstrutura = "Estrutura7",
+                            IdSubEstrutura = "SubEstrutura7",
                             ImgSubEstruturaComPeca = new byte[0],
                             AlturaSolado = 2,
                             DesignSolado = 1,
                             EstruturaSolado = 0
+                        },
+                        new
+                        {
+                            IdEstrutura = "Estrutura8",
+                            IdSubEstrutura = "SubEstrutura8",
+                            ImgSubEstruturaComPeca = new byte[0],
+                            AlturaSolado = 3,
+                            DesignSolado = 4,
+                            EstruturaSolado = 1
                         });
                 });
 
             modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Peca", b =>
                 {
-                    b.HasOne("PlanetShoes.Infrastructure.Data.SubEstruturaComPecaCabedal", null)
+                    b.HasOne("PlanetShoes.Infrastructure.Data.SubEstruturaComPeca", null)
                         .WithMany("Pecas")
-                        .HasForeignKey("SubEstruturaComPecaCabedalIdEstrutura");
+                        .HasForeignKey("IdEstrutura")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("PlanetShoes.Infrastructure.Data.SubEstruturaComPecaSolado", null)
-                        .WithMany("Pecas")
-                        .HasForeignKey("SubEstruturaComPecaSoladoIdEstrutura");
+                    b.HasOne("PlanetShoes.Infrastructure.Data.MateriaPrima", "MateriaPrima")
+                        .WithMany()
+                        .HasForeignKey("MateriaPrimaIdMateriaPrima");
+
+                    b.Navigation("MateriaPrima");
                 });
 
-            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaComPecaCabedal", b =>
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaAcabado", b =>
                 {
-                    b.Navigation("Pecas");
+                    b.HasOne("PlanetShoes.Infrastructure.Data.Estrutura", null)
+                        .WithMany("SubEstruturasAcabado")
+                        .HasForeignKey("EstruturaIdEstrutura");
                 });
 
-            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaComPecaSolado", b =>
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaAviamento", b =>
+                {
+                    b.HasOne("PlanetShoes.Infrastructure.Data.Estrutura", null)
+                        .WithMany("SubEstruturasAviamento")
+                        .HasForeignKey("EstruturaIdEstrutura");
+                });
+
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaComPeca", b =>
+                {
+                    b.HasOne("PlanetShoes.Infrastructure.Data.Estrutura", null)
+                        .WithMany("SubEstruturasComPeca")
+                        .HasForeignKey("EstruturaIdEstrutura");
+                });
+
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.Estrutura", b =>
+                {
+                    b.Navigation("SubEstruturasAcabado");
+
+                    b.Navigation("SubEstruturasAviamento");
+
+                    b.Navigation("SubEstruturasComPeca");
+                });
+
+            modelBuilder.Entity("PlanetShoes.Infrastructure.Data.SubEstruturaComPeca", b =>
                 {
                     b.Navigation("Pecas");
                 });

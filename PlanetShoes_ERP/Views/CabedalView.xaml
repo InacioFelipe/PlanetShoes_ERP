@@ -46,8 +46,9 @@
                 <Grid Grid.Row="0" Grid.Column="0">
                     <StackPanel Margin="3">
                         <TextBlock Text="Id Cabedal:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.ID, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource FormStyle}"/>
+                        <TextBox x:Name="IdEstrutura"
+                                 Text="{Binding EstruturaSelecionada.IdEstrutura, Mode=OneWay}" 
+                                 Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </Grid>
 
@@ -55,7 +56,7 @@
                 <Grid Grid.Row="0" Grid.Column="1">
                     <StackPanel Margin="3">
                         <TextBlock Text="Código:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.Codigo, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox x:Name="Codigo" Text="{Binding PecaCabedalSelecionada.Codigo, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </Grid>
@@ -64,7 +65,7 @@
                 <Grid Grid.Row="1" Grid.Column="0">
                     <StackPanel Margin="3">
                         <TextBlock Text="Nome:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox x:Name="NomeModelo" Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </Grid>
@@ -72,9 +73,12 @@
                 <Grid Grid.Row="1" Grid.Column="1">
                     <StackPanel Margin="3">
                         <TextBlock Text="Classe:" Style="{StaticResource TextFormStyle}"/>
-                        <ComboBox Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox x:Name="cbb_DesignCabedal" 
+                                ItemsSource="{Binding DesignsCabedal}"
+                                SelectedItem="{Binding EstruturaSelecionada.DesignCabedal, Mode=TwoWay}"
+                                  />
                     </StackPanel>
-                </Grid>
+                </Grid> 
 
                 <!-- Consumo / Valor Matérias-Primas / Valor Processos -->
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
@@ -82,21 +86,21 @@
                         <!-- Consumo -->
                         <StackPanel Margin="3">
                             <TextBlock Text="Consumo:" Style="{StaticResource TextFormStyle}"/>
-                            <TextBox Text="{Binding PecaCabedalSelecionada.Consumo, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox x:Name="Consumo" Text="{Binding PecaCabedalSelecionada.Consumo, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource FormStyle}"/>
                         </StackPanel>
 
                         <!-- Valor Matérias-Primas -->
                         <StackPanel Margin="3">
                             <TextBlock Text="Valor Matérias-Primas:" Style="{StaticResource TextFormStyle}"/>
-                            <TextBox Text="{Binding PecaCabedalSelecionada.ValorMateriasPrimas, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox x:Name="ValorMateriasPrimas" Text="{Binding PecaCabedalSelecionada.ValorMateriasPrimas, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource FormStyle}"/>
                         </StackPanel>
 
                         <!-- Valor Processos -->
                         <StackPanel Margin="3">
                             <TextBlock Text="Valor Processos:" Style="{StaticResource TextFormStyle}"/>
-                            <TextBox Text="{Binding PecaCabedalSelecionada.ValorProcessos, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox x:Name="ValorProcessos" Text="{Binding PecaCabedalSelecionada.ValorProcessos, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource FormStyle}"/>
                         </StackPanel>
                     </StackPanel>
@@ -115,8 +119,12 @@
                 
                 <!-- Lista de Peças -->
                 <Grid Grid.Row="0" Grid.Column="0">
-                    <DataGrid ItemsSource="{Binding PecasCabedal}" AutoGenerateColumns="True">
-
+                    <DataGrid x:Name="dtg_EstruturaComPecaCabedal" AutoGenerateColumns="True" ColumnWidth="100"
+                              ItemsSource="{Binding EstruturasComPecaCabedal}"
+                              SelectedItem="{Binding EstruturaSelecionada, Mode=TwoWay}">
+                        <!--<DataGrid.Columns>
+                            <DataGridTextColumn Header="Design Cabedal" Binding="{Binding DesignCabedal}" />
+                        </DataGrid.Columns>-->
                     </DataGrid>
                 </Grid>
 
@@ -126,7 +134,6 @@
                         <Button Style="{StaticResource CRUDButton}" Content="+"  Margin="5"></Button>
                         <Button Style="{StaticResource CRUDButton}" Content="-"  Margin="5"></Button>
                         <Button Style="{StaticResource CRUDButton}" Content="/"  Margin="5"></Button>
-                        <Button Style="{StaticResource CRUDButton}" Content="Import DXF"  Margin="5"></Button>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -152,7 +159,7 @@
             </Grid>
             
             <!-- Formulario Peças -->
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid x:Name="grd_FormularioPecas" Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -169,73 +176,90 @@
                 <!-- Nome do Modelo -->
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="3">
                     <TextBlock Text="Nome do Modelo:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.NomeModelo, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}"/>
+                    <TextBox x:Name="txb_nomeModelo"
+                            Text="{Binding NomeModelo, UpdateSourceTrigger=PropertyChanged}"  
+                            Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Nome da Peça -->
                 <StackPanel Grid.Row="0" Grid.Column="1" Margin="3">
                     <TextBlock Text="Nome da Peça:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.NomePeca, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}"/>
+                    <TextBox x:Name="txb_NomePeca"
+                                Text="{Binding NomePeca, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
-                <!-- Tamanho / Quantidades / Categoria -->
+                <!-- Tamanho / Agrupamento / Categoria / Consumo -->
                 <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.ColumnSpan="2">
                     <!-- Tamanho -->
                     <StackPanel Margin="3">
                         <TextBlock Text="Tamanho:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.Tamanho, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource FormStyle}"/>
+                        <TextBox x:Name="txb_Tamanho"
+                                  Text="{Binding Tamanho, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource FormStyle}"/>
                     </StackPanel>
 
-                    <!-- Quantidades -->
+                    <!-- Agrupamento -->
                     <StackPanel Margin="3">
-                        <TextBlock Text="Quantidades:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.Quantidades, UpdateSourceTrigger=PropertyChanged}" 
-                         Style="{StaticResource FormStyle}"/>
+                        <TextBlock Text="Agrupamento:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox x:Name="txb_Agrupamento"
+                                 Text="{Binding Agrupamento, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource FormStyle}"/>
                     </StackPanel>
 
                     <!-- Categoria -->
                     <StackPanel Margin="3">
                         <TextBlock Text="Categoria:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox Text="{Binding PecaCabedalSelecionada.Categoria, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource FormStyle}"/>
+                        <TextBox x:Name="txb_Categorias"
+                                  Text="{Binding Categoria, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource FormStyle}"/>
+                    </StackPanel>
+
+                    <!-- Consumo -->
+                    <StackPanel Margin="3">
+                        <TextBlock Text="Consumo:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBox x:Name="txb_Consumo"
+                                  Text="{Binding Consumo, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!-- Data -->
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="3">
                     <TextBlock Text="Data:" Style="{StaticResource TextFormStyle}"/>
-                    <DatePicker SelectedDate="{Binding PecaCabedalSelecionada.Data, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker x:Name="pck_Data" SelectedDate="{Binding PecaCabedalSelecionada.Data, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <!-- Hora -->
                 <StackPanel Grid.Row="2" Grid.Column="1" Margin="3">
                     <TextBlock Text="Hora:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.Hora, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}"/>
+                    <TextBox x:Name="txb_Hora"
+                              Text="{Binding Hora, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Perímetro -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="3">
                     <TextBlock Text="Perímetro:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.Perimetro, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}"/>
+                    <TextBox x:Name="txb_Perimetro"
+                              Text="{Binding Perimetro, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Superfície -->
                 <StackPanel Grid.Row="3" Grid.Column="1" Margin="3">
                     <TextBlock Text="Superfície:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.Superficie, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}"/>
+                    <TextBox x:Name="txb_Superficie"
+                             Text="{Binding Superficie, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Informações -->
                 <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="3">
                     <TextBlock Text="Informações:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox Text="{Binding PecaCabedalSelecionada.Informacoes, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource FormStyle}" Height="60" TextWrapping="Wrap"/>
+                    <TextBox x:Name="txb_Informacoes" Height="60" TextWrapping="Wrap"
+                             Text="{Binding Descricao, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Botões de CRUD -->
@@ -268,15 +292,16 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DataGrid Grid.Row="0" ItemsSource="{Binding MateriasPrimas}" AutoGenerateColumns="True">
-
+                        <DataGrid x:Name="dtg_PecasPorCabedal" Grid.Row="0" AutoGenerateColumns="True"
+                            ItemsSource="{Binding PecasDaEstruturaSelecionada}"
+                            SelectedItem="{Binding PecaSelecionada, Mode=TwoWay}">
                         </DataGrid>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0">
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button Style="{StaticResource CRUDButton}" Content="+"  Margin="5"></Button>
-                            <Button Style="{StaticResource CRUDButton}" Content="-"  Margin="5"></Button>
-                            <Button Style="{StaticResource CRUDButton}" Content="/"  Margin="5"></Button>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource CRUDButton}" Content="+"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="-"></Button>
+                            <Button Style="{StaticResource CRUDButton}" Content="Import DXF"></Button>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -292,7 +317,9 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DataGrid Grid.Row="0" ItemsSource="{Binding Processos}" AutoGenerateColumns="True">
+                        <DataGrid Grid.Row="0"
+                                  AutoGenerateColumns="True"
+                                  >
 
                         </DataGrid>
                     </Grid>
