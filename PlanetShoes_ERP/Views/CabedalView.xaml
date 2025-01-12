@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -61,35 +61,30 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Descrição -->
+                <!-- Nome Modelo -->
                 <Grid Grid.Row="1" Grid.Column="0">
                     <StackPanel Margin="3">
                         <TextBlock Text="Nome:" Style="{StaticResource TextFormStyle}"/>
-                        <TextBox x:Name="NomeModelo" Text="{Binding PecaCabedalSelecionada.Descricao, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource FormStyle}"/>
+                        <TextBox x:Name="NomeModelo"
+                                 Text="{Binding EstruturaSelecionada.NomeEstrutura, Mode=OneWay}" 
+                                 Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </Grid>
-
+                
+                <!-- Design Cabedal -->
                 <Grid Grid.Row="1" Grid.Column="1">
                     <StackPanel Margin="3">
-                        <TextBlock Text="Classe:" Style="{StaticResource TextFormStyle}"/>
+                        <TextBlock Text="Desgin Cabedal:" Style="{StaticResource TextFormStyle}"/>
                         <ComboBox x:Name="cbb_DesignCabedal" 
                                 ItemsSource="{Binding DesignsCabedal}"
-                                SelectedItem="{Binding EstruturaSelecionada.DesignCabedal, Mode=TwoWay}"
-                                  />
+                                SelectedItem="{Binding EstruturaSelecionada.DesignCabedal, Mode=TwoWay}">
+                        </ComboBox>
                     </StackPanel>
                 </Grid> 
 
                 <!-- Consumo / Valor Matérias-Primas / Valor Processos -->
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal">
-                        <!-- Consumo -->
-                        <StackPanel Margin="3">
-                            <TextBlock Text="Consumo:" Style="{StaticResource TextFormStyle}"/>
-                            <TextBox x:Name="Consumo" Text="{Binding PecaCabedalSelecionada.Consumo, UpdateSourceTrigger=PropertyChanged}" 
-                            Style="{StaticResource FormStyle}"/>
-                        </StackPanel>
-
                         <!-- Valor Matérias-Primas -->
                         <StackPanel Margin="3">
                             <TextBlock Text="Valor Matérias-Primas:" Style="{StaticResource TextFormStyle}"/>
@@ -117,14 +112,16 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 
-                <!-- Lista de Peças -->
+                <!-- Lista de Estruturas -->
                 <Grid Grid.Row="0" Grid.Column="0">
-                    <DataGrid x:Name="dtg_EstruturaComPecaCabedal" AutoGenerateColumns="True" ColumnWidth="100"
+                    <DataGrid x:Name="dtg_EstruturaComPecaCabedal" AutoGenerateColumns="False" ColumnWidth="100"
                               ItemsSource="{Binding EstruturasComPecaCabedal}"
                               SelectedItem="{Binding EstruturaSelecionada, Mode=TwoWay}">
-                        <!--<DataGrid.Columns>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding NomeEstrutura}" />
                             <DataGridTextColumn Header="Design Cabedal" Binding="{Binding DesignCabedal}" />
-                        </DataGrid.Columns>-->
+                            <DataGridTextColumn Header="Estrutura Cabedal" Binding="{Binding EstruturaCabedal}" />
+                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
 
@@ -171,13 +168,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
                 <!-- Nome do Modelo -->
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="3">
                     <TextBlock Text="Nome do Modelo:" Style="{StaticResource TextFormStyle}"/>
                     <TextBox x:Name="txb_nomeModelo"
-                            Text="{Binding NomeModelo, UpdateSourceTrigger=PropertyChanged}"  
+                            Text="{Binding NomeModelo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                             Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
@@ -185,7 +183,7 @@
                 <StackPanel Grid.Row="0" Grid.Column="1" Margin="3">
                     <TextBlock Text="Nome da Peça:" Style="{StaticResource TextFormStyle}"/>
                     <TextBox x:Name="txb_NomePeca"
-                                Text="{Binding NomePeca, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding NomePeca, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
@@ -195,7 +193,7 @@
                     <StackPanel Margin="3">
                         <TextBlock Text="Tamanho:" Style="{StaticResource TextFormStyle}"/>
                         <TextBox x:Name="txb_Tamanho"
-                                  Text="{Binding Tamanho, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Tamanho, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{StaticResource FormStyle}"/>
                     </StackPanel>
 
@@ -203,7 +201,7 @@
                     <StackPanel Margin="3">
                         <TextBlock Text="Agrupamento:" Style="{StaticResource TextFormStyle}"/>
                         <TextBox x:Name="txb_Agrupamento"
-                                 Text="{Binding Agrupamento, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Agrupamento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource FormStyle}"/>
                     </StackPanel>
 
@@ -211,7 +209,7 @@
                     <StackPanel Margin="3">
                         <TextBlock Text="Categoria:" Style="{StaticResource TextFormStyle}"/>
                         <TextBox x:Name="txb_Categorias"
-                                  Text="{Binding Categoria, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Categoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{StaticResource FormStyle}"/>
                     </StackPanel>
 
@@ -219,7 +217,7 @@
                     <StackPanel Margin="3">
                         <TextBlock Text="Consumo:" Style="{StaticResource TextFormStyle}"/>
                         <TextBox x:Name="txb_Consumo"
-                                  Text="{Binding Consumo, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Consumo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{StaticResource FormStyle}"/>
                     </StackPanel>
                 </StackPanel>
@@ -227,14 +225,27 @@
                 <!-- Data -->
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="3">
                     <TextBlock Text="Data:" Style="{StaticResource TextFormStyle}"/>
-                    <DatePicker x:Name="pck_Data" SelectedDate="{Binding PecaCabedalSelecionada.Data, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker x:Name="pck_Data"
+                                SelectedDate="{Binding Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DatePicker.Style>
+                            <Style TargetType="DatePicker">
+                                <Setter Property="SelectedDate" Value="{Binding Data, Mode=TwoWay}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Data}" Value="{x:Null}">
+                                        <Setter Property="SelectedDate" Value="{x:Null}"/>
+                                        <!-- Fica vazio -->
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DatePicker.Style>
+                    </DatePicker>
                 </StackPanel>
 
                 <!-- Hora -->
                 <StackPanel Grid.Row="2" Grid.Column="1" Margin="3">
                     <TextBlock Text="Hora:" Style="{StaticResource TextFormStyle}"/>
                     <TextBox x:Name="txb_Hora"
-                              Text="{Binding Hora, UpdateSourceTrigger=PropertyChanged}"
+                              Text="{Binding Hora, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
@@ -242,7 +253,7 @@
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="3">
                     <TextBlock Text="Perímetro:" Style="{StaticResource TextFormStyle}"/>
                     <TextBox x:Name="txb_Perimetro"
-                              Text="{Binding Perimetro, UpdateSourceTrigger=PropertyChanged}"
+                              Text="{Binding Perimetro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
@@ -250,20 +261,28 @@
                 <StackPanel Grid.Row="3" Grid.Column="1" Margin="3">
                     <TextBlock Text="Superfície:" Style="{StaticResource TextFormStyle}"/>
                     <TextBox x:Name="txb_Superficie"
-                             Text="{Binding Superficie, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Superficie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
-                <!-- Informações -->
+                <!-- Materia Prima -->
                 <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="3">
+                    <TextBlock Text="Materia Prima:" Style="{StaticResource TextFormStyle}"/>
+                    <TextBox x:Name="txb_MateriaPrima" IsReadOnly="True"
+                     Text="{Binding DescricaoMateriaPrima, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource FormStyle}"/>
+                </StackPanel>
+                
+                <!-- Informações -->
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="3">
                     <TextBlock Text="Informações:" Style="{StaticResource TextFormStyle}"/>
-                    <TextBox x:Name="txb_Informacoes" Height="60" TextWrapping="Wrap"
-                             Text="{Binding Descricao, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox x:Name="txb_Informacoes" TextWrapping="Wrap"
+                             Text="{Binding Descricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource FormStyle}"/>
                 </StackPanel>
 
                 <!-- Botões de CRUD -->
-                <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
+                <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
                     <Button Content="Novo" Command="{Binding NovoCommand}" Style="{StaticResource CRUDButton}"/>
                     <Button Content="Editar" Command="{Binding EditarCommand}" Style="{StaticResource CRUDButton}"/>
                     <Button Content="Salvar" Command="{Binding SalvarCommand}" Style="{StaticResource CRUDButton}"/>
@@ -291,10 +310,15 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
+                    <!-- Lista de Peças -->
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DataGrid x:Name="dtg_PecasPorCabedal" Grid.Row="0" AutoGenerateColumns="True"
-                            ItemsSource="{Binding PecasDaEstruturaSelecionada}"
-                            SelectedItem="{Binding PecaSelecionada, Mode=TwoWay}">
+                        <DataGrid x:Name="dtg_PecasPorCabedal" Grid.Row="0" AutoGenerateColumns="False"
+                                  ItemsSource="{Binding MateriasPrimas}"
+                                  SelectedItem="{Binding MateriaPrimaSelecionada, Mode=TwoWay}">
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn Header="Id Peça" Binding="{Binding IdPeca}" />-->
+                                <DataGridTextColumn Header="Nome Peça" Binding="{Binding Nome}" />
+                            </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0">
@@ -315,12 +339,15 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-
+                    
+                    <!-- Lista de Materias Primas -->
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DataGrid Grid.Row="0"
-                                  AutoGenerateColumns="True"
-                                  >
-
+                        <DataGrid x:Name="dtg_MateriasPrimas" Grid.Row="0" AutoGenerateColumns="False"
+                                  ItemsSource="{Binding MateriasPrimas}"
+                                  SelectedItem="{Binding MateriaPrimaSelecionada, Mode=TwoWay}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Matéria Prima" Binding="{Binding Descricao}" />
+                            </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0">

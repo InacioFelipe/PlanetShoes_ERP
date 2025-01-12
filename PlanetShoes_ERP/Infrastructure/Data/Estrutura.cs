@@ -12,6 +12,7 @@ namespace PlanetShoes.Infrastructure.Data
         public string IdEstrutura { get; set; }
 
         public string IdSubEstrutura { get; set; }
+        public string? NomeEstrutura {  get; set; }
         public string TipoEstrutura { get; set; }
 
 

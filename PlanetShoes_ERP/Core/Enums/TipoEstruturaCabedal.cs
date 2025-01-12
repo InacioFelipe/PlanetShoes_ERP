@@ -10,6 +10,9 @@ namespace PlanetShoes.Core.Enums
     {
         Knit,
         Couro,
-        Sintetico
+        Curvin,
+        Nylon,
+        Lona,
+        Camurça
     }
 }

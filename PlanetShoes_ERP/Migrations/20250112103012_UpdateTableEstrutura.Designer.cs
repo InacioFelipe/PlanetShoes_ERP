@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanetShoes.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using PlanetShoes.Infrastructure.Context;
 namespace PlanetShoes.Migrations
 {
     [DbContext(typeof(PlanetShoesDbContext))]
-    partial class PlanetShoesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250112103012_UpdateTableEstrutura")]
+    partial class UpdateTableEstrutura
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -414,11 +417,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "786E20A8-C63B-4DDB-82F7-77746E608F6E",
                             Agrupamento = 0,
-                            Codigo = 649,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "649",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Lateral",
                             Tamanho = 39,
@@ -432,11 +435,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "E5F4B02A-7C69-469A-86FF-C6E552643373",
                             Agrupamento = 0,
-                            Codigo = 649,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "649",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Frente",
                             Tamanho = 39,
@@ -450,11 +453,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "7D820DD4-F558-423C-804C-4AC12F9491C0",
                             Agrupamento = 0,
-                            Codigo = 649,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "649",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Lingua",
                             Tamanho = 39,
@@ -468,11 +471,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "1B183DD2-3629-44E1-A135-1CF173A960CB",
                             Agrupamento = 0,
-                            Codigo = 649,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "649",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "ContraForte",
                             Tamanho = 39,
@@ -486,11 +489,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "D370D1C3-E7C5-40AB-9E99-634D564088FD",
                             Agrupamento = 0,
-                            Codigo = 620,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "620",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Estrutura",
                             Tamanho = 39,
@@ -504,11 +507,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "940C7C4A-632A-4728-877B-89863C2BF36F",
                             Agrupamento = 0,
-                            Codigo = 649,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "649",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Regorço Tesourinha",
                             Tamanho = 39,
@@ -522,11 +525,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "238DEEE8-ACDB-43E3-B468-FE2EB0D4A2CD",
                             Agrupamento = 0,
-                            Codigo = 617,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "617",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Tubox",
                             Tamanho = 39,
@@ -540,11 +543,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "D23A4A71-53CF-45EA-88E4-FDAEDF03158B",
                             Agrupamento = 0,
-                            Codigo = 478,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "478",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Palmilha Acabamento",
                             Tamanho = 39,
@@ -558,11 +561,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "BE2E37D0-01CF-4C58-A9CE-2612571B8A9A",
                             Agrupamento = 0,
-                            Codigo = 313,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "313",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Palmilha Montagem",
                             Tamanho = 39,
@@ -576,11 +579,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "A3150C99-045A-4EA9-8583-866233CE1F18",
                             Agrupamento = 0,
-                            Codigo = 421,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "421",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Cunho Palmilha",
                             Tamanho = 39,
@@ -594,11 +597,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "81598CCB-AEE0-4448-9106-8226BC54E2AE",
                             Agrupamento = 0,
-                            Codigo = 23,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "23",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Ilhos",
                             Tamanho = 39,
@@ -612,11 +615,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "1D39D7E3-F75E-4611-AF5D-6B66012ECFDF",
                             Agrupamento = 0,
-                            Codigo = 460,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "460",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "ColaPesponto",
                             Tamanho = 39,
@@ -630,11 +633,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "D9A9C947-1A63-4496-920E-64BBF4ED83E1",
                             Agrupamento = 0,
-                            Codigo = 158,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "158",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Palmilha Acabamento",
                             Tamanho = 39,
@@ -648,11 +651,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "32E9988E-6969-4209-9BF6-90AC2BD4FE79",
                             Agrupamento = 0,
-                            Codigo = 52,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "52",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Tubox",
                             Tamanho = 39,
@@ -666,11 +669,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "D1D37C29-5759-443D-AC2B-1118F734FF8D",
                             Agrupamento = 0,
-                            Codigo = 0,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Etiqueta Lingua",
                             Tamanho = 39,
@@ -684,11 +687,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "6B4B84E7-47B8-4E0D-A575-D27F8E21EDB4",
                             Agrupamento = 0,
-                            Codigo = 529,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "529",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Viés",
                             Tamanho = 39,
@@ -702,11 +705,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "34391FA0-DF9D-450B-A61D-9F07929D27DF",
                             Agrupamento = 0,
-                            Codigo = 0,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Tubox",
                             Tamanho = 39,
@@ -720,11 +723,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "A55D8AB8-F77E-4BEA-8BAE-3AD36930606A",
                             Agrupamento = 0,
-                            Codigo = 506,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "506",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Linha Biqueira",
                             Tamanho = 39,
@@ -738,11 +741,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "83BEFC4D-6572-47C7-B2D1-D36B7E7DD024",
                             Agrupamento = 0,
-                            Codigo = 506,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "506",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Linha Viés Lingua",
                             Tamanho = 39,
@@ -756,11 +759,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "83FDF359-85CA-45C8-AEEE-B4D7D7DD8EE7",
                             Agrupamento = 0,
-                            Codigo = 506,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "506",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Linha Contra Forte",
                             Tamanho = 39,
@@ -774,11 +777,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "81EC7B9A-D5D8-4334-A4E2-F994D0CF352E",
                             Agrupamento = 0,
-                            Codigo = 506,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "506",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Linha Viés Cabedal",
                             Tamanho = 39,
@@ -792,11 +795,11 @@ namespace PlanetShoes.Migrations
                         {
                             IdPeca = "B963687B-8253-47F6-8EAC-4B0247FF14D1",
                             Agrupamento = 0,
-                            Codigo = 506,
+                            Codigo = 101,
                             Consumo = 2.5f,
                             Descricao = "",
                             IdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289",
-                            IdMateriaPrima = "506",
+                            IdMateriaPrima = "MateriaPrima1",
                             ImgPeca = new byte[0],
                             Nome = "Linha Canelinha",
                             Tamanho = 39,

@@ -20,6 +20,49 @@ namespace PlanetShoes.Infrastructure.Context
         {
         }
 
+        // Criação de Chaves para os Ids de Cabedais de Producao
+        private string TraditionIdEstrutura = "01D87D95-6249-4498-9DDA-A02DC6E42289";
+        private string TraditionIdSubEstrutura = "F6E11985-8E4E-48E4-B2CC-D465D000346E";
+
+        private string NewStoneIdEstrutura = "A035415C-2E66-488C-B71A-ABFDC01C563B";
+        private string NewStoneIdSybEstrutura = "706DB229-FBDE-4DC8-809F-4438A04466C2";
+
+        private string Winner7070IdEstrutura = "E8239707-2A14-4E06-AA4C-58ED9A42EFB9";
+        private string Winner7070IdSubEstrutura = "4BA8CDC6-E596-428D-85AC-59407F2C2F87";
+
+        private string JupiterInfIdEstrutura = "29FBB68A-5082-4DA0-B0A9-C7CCA1F74863";
+        private string JupiterInfIdSubEstrutura ="58888D1E-ACB8-4C21-ADAE-4FA045BDABC2";
+
+        private string OrionInfIdEstrutura = "82B642A3-49E5-44E1-BF4C-6DB5A5D32E2E";
+        private string OrionInfIdSubEstrutura ="64DDEF39-2D7F-4536-9384-EF38A3BCAF64";
+
+        private string VintageIdEstrutura = "5B26036A-093A-4281-B7F9-2FC8E279BA9B";
+        private string VintageIdSubEstrutura = "614D36C0-BB73-4A47-81DC-53CA4E84EABF";
+
+        private string IcaroIdEstrutura = "70C8D67F-8389-4A0F-B562-B65755BF5F2D";
+        private string IcaroIdSubEstrutura = "E866DA20-6D2C-4DB8-8CAE-87E0583E0976";
+
+        private string EmmaIdEstrutura = "B7DCEF23-1A4D-4107-8E09-5D77C4C7D672";
+        private string EmmaIdSubEstrutura = "9DE1CFEF-3CC5-41D7-899A-CB6CFA9E097D";
+
+        private string RockIdEstrutura = "D98C37D8-EBA7-4C56-8C2D-D1F09900968D";
+        private string RockIdSubEstrutura = "50606EB5-86C1-40CA-A6A1-820E050DE4BA";
+
+        private string IvyIdEstrutura = "6A041E67-E930-4C90-A5B5-4E6FFFDD9B4D";
+        private string IvyIdSubEstrutura = "0776F178-C54A-4510-9071-B3BCD8949294";
+
+        private string LosAngelesCanoBaixoIdEstrutura = "EF8F52BD-03C8-431B-8BBF-53E312E667CE";
+        private string LosAngelesCanoBaixoIdSubEstrutura = "84EB0992-FF2B-4C17-AD84-884B5396C26C";
+
+        private string MayaFrequenciaIdEstrutura = "8DBD4389-489A-420E-951D-8E10692C66C7";
+        private string MayaFrequenciaIdSubEstrutura = "BBC0A289-83D4-4021-AF66-E8137C9AD0FE";
+
+        private string EmpireIdEstrutura = "890A6467-11F0-4F24-AB71-1DA78E7557DC";
+        private string EmpireIdSubEstrutura = "4EDDBF84-E910-45D9-9F5A-1D438A4C6079";
+
+        private string PegasusIdEstrutura = "4FCC9FBE-2E74-49EE-894B-CD0218DEE4FC";
+        private string PegasusIdSubEstrutura = "731C10FA-2FE5-46FC-AAB3-EF9C698AFCE5";
+
         // DbSets para cada entidade
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Estrutura> Estruturas { get; set; }
@@ -73,14 +116,19 @@ namespace PlanetShoes.Infrastructure.Context
                 .HasForeignKey(p => p.IdEstrutura);
 
 
-            // Inserção de dados iniciais
+            // Inserção de dados Teste
             InsereUsuarios(modelBuilder);
             InsereMateriaPrima(modelBuilder);
             InsereEstruturas(modelBuilder);
             InserePecas(modelBuilder);
+
+            // Insere Dados Producao
+            InsereCabedaisProducao(modelBuilder);
+            InserePecasTradition(modelBuilder);
         }
 
 
+        // Dados para insercao
         private void InsereUsuarios(ModelBuilder modelBuilder)
         {
             //---------------------------------------------
@@ -109,7 +157,7 @@ namespace PlanetShoes.Infrastructure.Context
             {
                 UserId = Guid.NewGuid().ToString(), // Gera um novo GUID
                 Username = "Gabriel",
-                Password = "gabriel123", // Em um cenário real, use um hash de senha!
+                Password = "gabriel", // Em um cenário real, use um hash de senha!
                 Email = "gabriel.oliveira@planetshoes.com",
                 DisplayName = "Gabriel Oliveira"
             };
@@ -118,7 +166,7 @@ namespace PlanetShoes.Infrastructure.Context
             {
                 UserId = Guid.NewGuid().ToString(), // Gera um novo GUID
                 Username = "Sidney",
-                Password = "sidney123", // Em um cenário real, use um hash de senha!
+                Password = "sidney", // Em um cenário real, use um hash de senha!
                 Email = "sidney.magal@planetshoes.com",
                 DisplayName = "Sidney Magal"
             };
@@ -127,7 +175,7 @@ namespace PlanetShoes.Infrastructure.Context
             {
                 UserId = Guid.NewGuid().ToString(), // Gera um novo GUID
                 Username = "Wederson",
-                Password = "wederson123", // Em um cenário real, use um hash de senha!
+                Password = "wederson", // Em um cenário real, use um hash de senha!
                 Email = "wederson.ferreira@planetshoes.com",
                 DisplayName = "Wederson Ferreira"
             };
@@ -211,8 +259,9 @@ namespace PlanetShoes.Infrastructure.Context
                 IdEstrutura = "Estrutura6",
                 IdSubEstrutura = "SubEstrutura6",
                 DesignCabedal = DesignCabedal.Running,
-                EstruturaCabedal = TipoEstruturaCabedal.Sintetico
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
             };
+
 
             // Inserção de estruturas do tipo ComPeca (Solado)
             var estruturaComPecaSolado1 = new SubEstruturaComPecaSolado
@@ -356,5 +405,544 @@ namespace PlanetShoes.Infrastructure.Context
             modelBuilder.Entity<PecaSolado>().HasData(pecaSolado1, pecaSolado2);
             modelBuilder.Entity<Peca>().HasData(pecaGenerica1, pecaGenerica2);
         }
+
+        private void InsereCabedaisProducao(ModelBuilder modelBuilder)
+        {
+            var Tradition = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = TraditionIdEstrutura,
+                IdSubEstrutura = TraditionIdSubEstrutura,
+                NomeEstrutura="Tradition",
+                DesignCabedal = DesignCabedal.Classic,
+                EstruturaCabedal = TipoEstruturaCabedal.Lona
+            };
+            var NewStone7010 = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = NewStoneIdEstrutura,
+                IdSubEstrutura = NewStoneIdSybEstrutura,
+                NomeEstrutura="New Stone 7010",
+                DesignCabedal = DesignCabedal.Classic,
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
+            };
+            var Winner7070 = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = Winner7070IdEstrutura,
+                IdSubEstrutura = Winner7070IdSubEstrutura,
+                NomeEstrutura = "Winner 7010",
+                DesignCabedal = DesignCabedal.Classic,
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
+            };
+            var JupiterInf = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = JupiterInfIdEstrutura,
+                IdSubEstrutura = JupiterInfIdSubEstrutura,
+                NomeEstrutura = "Jupter infanatil",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var OrionInf = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = OrionInfIdEstrutura,
+                IdSubEstrutura = OrionInfIdSubEstrutura,
+                NomeEstrutura = "Orion infantil",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var Vintage = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = VintageIdEstrutura,
+                IdSubEstrutura = VintageIdSubEstrutura,
+                NomeEstrutura = "Vintage",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var Icaro = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = IcaroIdEstrutura,
+                IdSubEstrutura = IcaroIdSubEstrutura,
+                NomeEstrutura = "Icaro",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var Emma = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = EmmaIdEstrutura,
+                IdSubEstrutura = EmmaIdSubEstrutura,
+                NomeEstrutura = "Emma",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
+            };
+            var Rock = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = RockIdEstrutura,
+                IdSubEstrutura = RockIdSubEstrutura,
+                NomeEstrutura = "Rock",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
+            };
+            var Ivy = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = IvyIdEstrutura,
+                IdSubEstrutura = IvyIdSubEstrutura,
+                NomeEstrutura = "Ivy",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Curvin
+            };
+            var LosAngelesCanoBaixo = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = LosAngelesCanoBaixoIdEstrutura,
+                IdSubEstrutura = LosAngelesCanoBaixoIdSubEstrutura,
+                NomeEstrutura = "Los Angeles Cano Baixo",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Lona
+            };
+            var MayaFrequencia = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = MayaFrequenciaIdEstrutura,
+                IdSubEstrutura = MayaFrequenciaIdSubEstrutura,
+                NomeEstrutura = "Maya Frequencia",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var Empire = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = EmpireIdEstrutura,
+                IdSubEstrutura = EmpireIdSubEstrutura,
+                NomeEstrutura = "Empire",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+            var Pegasus = new SubEstruturaComPecaCabedal
+            {
+                IdEstrutura = PegasusIdEstrutura,
+                IdSubEstrutura = PegasusIdSubEstrutura,
+                NomeEstrutura = "Pegasus",
+                DesignCabedal = DesignCabedal.Running,
+                EstruturaCabedal = TipoEstruturaCabedal.Nylon
+            };
+
+            //Inserção das estruturas no banco de dados
+            modelBuilder.Entity<SubEstruturaComPecaCabedal>().HasData(
+                Tradition, NewStone7010, Winner7070,
+                JupiterInf, OrionInf, Vintage, Icaro, Emma,
+                Rock, Ivy, LosAngelesCanoBaixo, MayaFrequencia,
+                Empire, Pegasus);
+        }
+
+        private void InserePecasTradition(ModelBuilder modelBuilder)
+        {
+            // Inserção de peças
+            var Lateral = new PecaCabedal
+            {
+                IdPeca = "786E20A8-C63B-4DDB-82F7-77746E608F6E",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 649,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Lateral",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "649",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+
+
+            var Frente = new PecaCabedal
+            {
+                IdPeca = "E5F4B02A-7C69-469A-86FF-C6E552643373",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 649,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Frente",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "649",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+
+            var Lingua = new PecaCabedal
+            {
+                IdPeca = "7D820DD4-F558-423C-804C-4AC12F9491C0",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 649,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Lingua",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "649",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+
+            var ContraForte = new PecaCabedal
+            {
+                IdPeca = "1B183DD2-3629-44E1-A135-1CF173A960CB",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 649,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "ContraForte",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "649",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var Estrutura = new PecaCabedal
+            {
+                IdPeca = "D370D1C3-E7C5-40AB-9E99-634D564088FD",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 620,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Estrutura",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "620",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var ReforçoTesourinha = new PecaCabedal
+            {
+                IdPeca = "940C7C4A-632A-4728-877B-89863C2BF36F",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 649,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Regorço Tesourinha",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "649",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var Tubox = new PecaCabedal
+            {
+
+                IdPeca = "238DEEE8-ACDB-43E3-B468-FE2EB0D4A2CD",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 617,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Tubox",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "617",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var PalmilhaAcabamento = new PecaCabedal
+            {
+                IdPeca = "D23A4A71-53CF-45EA-88E4-FDAEDF03158B",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 478,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Palmilha Acabamento",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "478",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var PalmilhaMontagem = new PecaCabedal
+            {
+                IdPeca = "BE2E37D0-01CF-4C58-A9CE-2612571B8A9A",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 313,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Palmilha Montagem",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "313",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var CunhoPalmilha = new PecaCabedal
+            {
+                IdPeca = "A3150C99-045A-4EA9-8583-866233CE1F18",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 421,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Cunho Palmilha",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "421",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var Ilhos = new PecaCabedal
+            {
+                IdPeca = "81598CCB-AEE0-4448-9106-8226BC54E2AE",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 23,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Ilhos",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "23",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var ColaPesponto = new PecaCabedal
+            {
+                IdPeca = "1D39D7E3-F75E-4611-AF5D-6B66012ECFDF",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 460,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "ColaPesponto",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "460",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var PalmilhaAcabamentoSilk = new PecaCabedal
+            {
+                IdPeca = "D9A9C947-1A63-4496-920E-64BBF4ED83E1",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 158,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Palmilha Acabamento",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "158",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var Cadarço = new PecaCabedal
+            {
+                IdPeca = "32E9988E-6969-4209-9BF6-90AC2BD4FE79",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 52,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Tubox",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "52",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinguaEtiqueta = new PecaCabedal
+            {
+                IdPeca = "D1D37C29-5759-443D-AC2B-1118F734FF8D",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 0,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Etiqueta Lingua",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var ViesCabedalLingua = new PecaCabedal
+            {
+                IdPeca = "6B4B84E7-47B8-4E0D-A575-D27F8E21EDB4",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 529,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Viés",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "529",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var EtiquetaFusao = new PecaCabedal
+            {
+                IdPeca = "34391FA0-DF9D-450B-A61D-9F07929D27DF",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 0,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Tubox",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinhaBiqueira = new PecaCabedal
+            {
+                IdPeca = "A55D8AB8-F77E-4BEA-8BAE-3AD36930606A",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 506,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Linha Biqueira",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "506",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinhaViesLingua = new PecaCabedal
+            {
+                IdPeca = "83BEFC4D-6572-47C7-B2D1-D36B7E7DD024",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 506,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Linha Viés Lingua",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "506",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinhaContraForte = new PecaCabedal
+            {
+                IdPeca = "83FDF359-85CA-45C8-AEEE-B4D7D7DD8EE7",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 506,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Linha Contra Forte",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "506",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinhaViesCabedal = new PecaCabedal
+            {
+                IdPeca = "81EC7B9A-D5D8-4334-A4E2-F994D0CF352E",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 506,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Linha Viés Cabedal",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "506",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+            var LinhaCanelinha = new PecaCabedal
+            {
+                IdPeca = "B963687B-8253-47F6-8EAC-4B0247FF14D1",
+                Agrupamento = AgrupamentoPeca.Um_Para_Um,
+                Codigo = 506,
+                Consumo = 2.5f,
+                Descricao = "",
+                ImgPeca = new byte[0],
+                Nome = "Linha Canelinha",
+                Tamanho = TamanhoPeca.Tamanho39,
+                IdMateriaPrima = "506",
+                IdEstrutura = TraditionIdEstrutura,
+                NomeModelo = "Tradition",
+                //Perimetro = 50.0f,
+                //Superficie = 100.0f,
+                //Data = DateTime.Now.Date,
+                //Hora = DateTime.Now.TimeOfDay,
+            };
+
+
+            modelBuilder.Entity<PecaCabedal>().HasData(
+            Lateral, Frente, Lingua, ContraForte, Estrutura, ReforçoTesourinha, Tubox,
+            PalmilhaAcabamento, PalmilhaMontagem, CunhoPalmilha, Ilhos, ColaPesponto,
+            PalmilhaAcabamentoSilk, Cadarço, LinguaEtiqueta, ViesCabedalLingua, EtiquetaFusao,
+            LinhaBiqueira, LinhaViesLingua, LinhaContraForte, LinhaViesCabedal, LinhaCanelinha);
+
+        }
+
+
     }
 }

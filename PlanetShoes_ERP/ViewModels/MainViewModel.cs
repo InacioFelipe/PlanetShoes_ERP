@@ -2,6 +2,7 @@
 using PlanetShoes.Core.Interfaces;
 using PlanetShoes.Infrastructure.Repositories;
 using PlanetShoes.ViewModels;
+using PlanetShoes.Views;
 using System.Windows.Input;
 
 namespace PlanetShoes.ViewModels
@@ -12,6 +13,7 @@ namespace PlanetShoes.ViewModels
         private readonly IPecaCabedalRepository _pecaCabedalRepository;
         private readonly IEstruturaRepository _estruturaRepository;
         private readonly IPecaRepository _pecaRepository;
+        private readonly IMateriaPrimaRepository _materiaPrimaRepository;
 
         private ViewModelBase _currentChildView;
 
@@ -25,10 +27,11 @@ namespace PlanetShoes.ViewModels
         public ICommand ShowManualMontagemViewCommand { get; }
         public ICommand ShowEstruturaViewCommand { get; }
 
-        public MainViewModel(IEstruturaRepository estruturaRepository, IPecaRepository pecaRepository)
+        public MainViewModel(IEstruturaRepository estruturaRepository, IPecaRepository pecaRepository, IMateriaPrimaRepository materiaPrimaRepository)
         {
             _estruturaRepository = estruturaRepository;
             _pecaRepository = pecaRepository;
+            _materiaPrimaRepository = materiaPrimaRepository;
 
             ShowMateriaPrimaViewCommand = new RelayCommand(ExecuteShowMateriaPrimaViewCommand);
             ShowAcabadoViewCommand = new RelayCommand(ExecuteShowAcabadoViewCommand);
@@ -51,7 +54,7 @@ namespace PlanetShoes.ViewModels
         //Navegação
         private void ExecuteShowMateriaPrimaViewCommand(object obj)
         {
-            
+            CurrentChildView = new MateriaPrimaViewModel(_materiaPrimaRepository);
         }
         private void ExecuteShowAcabadoViewCommand(object obj)
         {
@@ -67,7 +70,7 @@ namespace PlanetShoes.ViewModels
         }
         private void ExecuteShowCabedalViewCommand(object obj)
         {
-            CurrentChildView = new CabedalViewModel(_estruturaRepository, _pecaRepository);
+            CurrentChildView = new CabedalViewModel(_estruturaRepository, _pecaRepository, _materiaPrimaRepository);
         }
 
         private void ExecuteShowFichaTecnicaViewCommand(object obj)
@@ -85,7 +88,7 @@ namespace PlanetShoes.ViewModels
 
         private void ExecuteShowEstruturaViewCommand(object obj)
         {
-            CurrentChildView = new EstruturaViewModel(_estruturaRepository, _pecaRepository);
+            CurrentChildView = new EstruturaViewModel(_estruturaRepository, _pecaRepository, _materiaPrimaRepository);
         }
     }
 }

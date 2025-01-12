@@ -37,6 +37,7 @@ namespace PlanetShoes
             services.AddScoped<IPecaCabedalRepository, PecaCabedalRepository>();
             services.AddScoped<IEstruturaRepository, EstruturaRepository>();
             services.AddScoped<IPecaRepository, PecaRepository>();
+            services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
 
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
 
@@ -45,14 +46,24 @@ namespace PlanetShoes
             services.AddTransient<MainViewModel>(
                 provider => new MainViewModel(
                     provider.GetRequiredService<IEstruturaRepository>(),
-                    provider.GetRequiredService<IPecaRepository>()
+                    provider.GetRequiredService<IPecaRepository>(),
+                    provider.GetRequiredService<IMateriaPrimaRepository>()
                 ));
 
             // Registra EstruturaViewModel
             services.AddTransient<EstruturaViewModel>(
                 provider => new EstruturaViewModel(
                    provider.GetRequiredService<IEstruturaRepository>(),
-                   provider.GetRequiredService<IPecaRepository>()
+                   provider.GetRequiredService<IPecaRepository>(),
+                   provider.GetRequiredService<IMateriaPrimaRepository>()
+               ));
+
+            // Registra EstruturaViewModel
+            services.AddTransient<CabedalViewModel>(
+                provider => new CabedalViewModel(
+                   provider.GetRequiredService<IEstruturaRepository>(),
+                   provider.GetRequiredService<IPecaRepository>(),
+                   provider.GetRequiredService<IMateriaPrimaRepository>()
                ));
 
             // Registra os ViewModels

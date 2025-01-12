@@ -30,7 +30,8 @@ namespace PlanetShoes.ViewModels
 
         // Construtor
         public EstruturaViewModel(IEstruturaRepository estruturaRepository,
-                                  IPecaRepository pecaRepository)
+                                  IPecaRepository pecaRepository,
+                                  IMateriaPrimaRepository materiaPrimaRepository)
         {
             _estruturaRepository = estruturaRepository ?? throw new ArgumentNullException(nameof(estruturaRepository));
             _pecaRepository = pecaRepository ?? throw new ArgumentNullException(nameof(pecaRepository));
