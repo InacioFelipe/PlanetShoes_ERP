@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using PlanetShoes.Core.Enums;
 using PlanetShoes.Infrastructure.Data;
 using System;
@@ -80,17 +81,23 @@ namespace PlanetShoes.Infrastructure.Context
         // Configuração da conexão com o banco de dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=localhost\\SQLEXPRESS;" +
-                "Database=PlanetShoesDb;" +
-                "Integrated Security=True;" +
-                "Connect Timeout=30;" +
-                "Encrypt=True;" +
-                "Trust Server Certificate=True;" +
-                "Application Intent=ReadWrite;" +
-                "Multi Subnet Failover=False"
-            )
-            .EnableSensitiveDataLogging(); // Habilita logging detalhado
+            // #############################################################
+            // ###      Não é mais necessário a configuração aqui.       ###
+            // ### A aplicação está fazendo a Injeçãao de Dependencia do ###
+            // ###          IDbContextFactory no App.xaml.cs             ###   
+            // #############################################################
+
+            //optionsBuilder.UseSqlServer(
+            //    "Server=localhost\\SQLEXPRESS;" +
+            //    "Database=PlanetShoesDb;" +
+            //    "Integrated Security=True;" +
+            //    "Connect Timeout=30;" +
+            //    "Encrypt=True;" +
+            //    "Trust Server Certificate=True;" +
+            //    "Application Intent=ReadWrite;" +
+            //    "Multi Subnet Failover=False"
+            //)
+            //.EnableSensitiveDataLogging(); // Habilita logging detalhado
         }
 
 
@@ -122,13 +129,13 @@ namespace PlanetShoes.Infrastructure.Context
             InsereEstruturas(modelBuilder);
             InserePecas(modelBuilder);
 
-            // Insere Dados Producao
+            // Inserção de Dados Producao
             InsereCabedaisProducao(modelBuilder);
             InserePecasTradition(modelBuilder);
         }
 
 
-        // Dados para insercao
+        // Dados Iniciais para teste
         private void InsereUsuarios(ModelBuilder modelBuilder)
         {
             //---------------------------------------------
@@ -405,6 +412,9 @@ namespace PlanetShoes.Infrastructure.Context
             modelBuilder.Entity<PecaSolado>().HasData(pecaSolado1, pecaSolado2);
             modelBuilder.Entity<Peca>().HasData(pecaGenerica1, pecaGenerica2);
         }
+
+
+        // Dados Inicias de Producao
 
         private void InsereCabedaisProducao(ModelBuilder modelBuilder)
         {

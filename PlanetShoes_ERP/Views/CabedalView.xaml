@@ -313,10 +313,10 @@
                     <!-- Lista de Peças -->
                     <Grid Grid.Row="0" Grid.Column="0">
                         <DataGrid x:Name="dtg_PecasPorCabedal" Grid.Row="0" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding MateriasPrimas}"
-                                  SelectedItem="{Binding MateriaPrimaSelecionada, Mode=TwoWay}">
+                            ItemsSource="{Binding PecasDaEstruturaSelecionada}"
+                            SelectedItem="{Binding PecaSelecionada, Mode=TwoWay}">
                             <DataGrid.Columns>
-                                <!--<DataGridTextColumn Header="Id Peça" Binding="{Binding IdPeca}" />-->
+                                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
                                 <DataGridTextColumn Header="Nome Peça" Binding="{Binding Nome}" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -330,7 +330,7 @@
                     </Grid>
                 </Grid>
 
-                <!-- Processos -->
+                <!-- Materias Primas -->
                 <Grid Grid.Row="0" Grid.Column="1" Margin="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -343,10 +343,12 @@
                     <!-- Lista de Materias Primas -->
                     <Grid Grid.Row="0" Grid.Column="0">
                         <DataGrid x:Name="dtg_MateriasPrimas" Grid.Row="0" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding MateriasPrimas}"
+                                  ItemsSource="{Binding MateriasPrimasDasPecas}"
                                   SelectedItem="{Binding MateriaPrimaSelecionada, Mode=TwoWay}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Matéria Prima" Binding="{Binding Descricao}" />
+                                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
+                                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" />
+                                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

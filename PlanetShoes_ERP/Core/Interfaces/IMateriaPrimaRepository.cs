@@ -23,5 +23,8 @@ namespace PlanetShoes.Core.Interfaces
 
         // Remove uma matéria-prima do banco de dados com base no ID
         Task DeleteAsync(string id);
+
+        // Retorna uma lista de todas as matérias-primas pela estrutura selecinada (Cod das Pecas)
+        Task<List<MateriaPrima>> GetByPecasCodigosAsync(List<int> codigosPecas);
     }
 }

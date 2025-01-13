@@ -13,16 +13,16 @@ namespace PlanetShoes.Infrastructure.Tests.LoginTest
         private readonly PlanetShoesDbContext _context;
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public LoginTests()
-        {
-            // Configura o banco em memória
-            var options = new DbContextOptionsBuilder<PlanetShoesDbContext>()
-                .UseInMemoryDatabase(databaseName: "LoginTestDb")
-                .Options;
+        //public LoginTests()
+        //{
+        //    // Configura o banco em memória
+        //    var options = new DbContextOptionsBuilder<PlanetShoesDbContext>()
+        //        .UseInMemoryDatabase(databaseName: "LoginTestDb")
+        //        .Options;
 
-            _context = new PlanetShoesDbContext(options);
-            _usuarioRepository = new UsuarioRepository(_context);
-        }
+        //    _context = new PlanetShoesDbContext(options);
+        //    _usuarioRepository = new UsuarioRepository(_context);
+        //}
 
         [Fact]
         public async Task GetUsuarioByUsernameAsync_UsuarioExistente_RetornaUsuario()

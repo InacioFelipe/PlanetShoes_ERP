@@ -9,42 +9,64 @@ namespace PlanetShoes.Infrastructure.Repositories
 {
     public class EstruturaRepository : IEstruturaRepository
     {
-        private readonly PlanetShoesDbContext _context;
+        //private readonly PlanetShoesDbContext _context;
 
-        public EstruturaRepository(PlanetShoesDbContext context)
+        //public EstruturaRepository(PlanetShoesDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly IDbContextFactory<PlanetShoesDbContext> _contextFactory;
+
+        public EstruturaRepository(IDbContextFactory<PlanetShoesDbContext> contextFactory)
         {
-            _context = context;
+            _contextFactory = contextFactory;
         }
 
         public async Task<List<Estrutura>> GetAllEstruturasAsync()
         {
-            return await _context.Estruturas.ToListAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.Estruturas.ToListAsync();
+            }
         }
 
         public async Task<Estrutura> GetEstruturaCompletaAsync(string id)
         {
-            return await _context.Estruturas.FindAsync(id);
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.Estruturas.FindAsync(id);
+            }
         }
 
         public async Task AddEstruturaAsync(Estrutura estrutura)
         {
-            await _context.Estruturas.AddAsync(estrutura);
-            await _context.SaveChangesAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                await context.Estruturas.AddAsync(estrutura);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateEstruturaAsync(Estrutura estrutura)
         {
-            _context.Estruturas.Update(estrutura);
-            await _context.SaveChangesAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                context.Estruturas.Update(estrutura);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteEstruturaAsync(string id)
         {
-            var estrutura = await _context.Estruturas.FindAsync(id);
-            if (estrutura != null)
+            using (var context = _contextFactory.CreateDbContext())
             {
-                _context.Estruturas.Remove(estrutura);
-                await _context.SaveChangesAsync();
+                var estrutura = await context.Estruturas.FindAsync(id);
+                if (estrutura != null)
+                {
+                    context.Estruturas.Remove(estrutura);
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }

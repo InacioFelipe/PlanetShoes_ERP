@@ -7,49 +7,88 @@ namespace PlanetShoes.Infrastructure.Repositories
 {
     public class MateriaPrimaRepository : IMateriaPrimaRepository
     {
-        private readonly PlanetShoesDbContext _context;
+        //private readonly PlanetShoesDbContext _context;
+        //public MateriaPrimaRepository(PlanetShoesDbContext context)
+        //{
+        //    _context = context;
+        //}
 
-        public MateriaPrimaRepository(PlanetShoesDbContext context)
+
+        private readonly IDbContextFactory<PlanetShoesDbContext> _contextFactory;
+
+        public MateriaPrimaRepository(IDbContextFactory<PlanetShoesDbContext> contextFactory)
         {
-            _context = context;
+            _contextFactory = contextFactory;
         }
+
+        
 
         public async Task<List<MateriaPrima>> GetAllAsync()
         {
-            return await _context.MateriasPrimas.ToListAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.MateriasPrimas.ToListAsync();
+            }
         }
 
         public async Task<MateriaPrima> GetByIdAsync(string id)
         {
-            return await _context.MateriasPrimas.FindAsync(id);
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.MateriasPrimas.FindAsync(id);
+            }
         }
 
         public async Task<MateriaPrima> GetByCodAsync(int cod)
         {
-            return await _context.MateriasPrimas
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.MateriasPrimas
                                 .FirstOrDefaultAsync(mp => mp.Codigo == cod);
+            }
+        }
+
+        public async Task<List<MateriaPrima>> GetByPecasCodigosAsync(List<int> codigosPecas)
+        {
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.MateriasPrimas
+                                    .Where(mp => codigosPecas.Contains(mp.Codigo))
+                                    .ToListAsync();
+            }
         }
 
         public async Task AddAsync(MateriaPrima materiaPrima)
         {
-            await _context.MateriasPrimas.AddAsync(materiaPrima);
-            await _context.SaveChangesAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                await context.MateriasPrimas.AddAsync(materiaPrima);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateAsync(MateriaPrima materiaPrima)
         {
-            _context.MateriasPrimas.Update(materiaPrima);
-            await _context.SaveChangesAsync();
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                context.MateriasPrimas.Update(materiaPrima);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteAsync(string id)
         {
-            var materiaPrima = await _context.MateriasPrimas.FindAsync(id);
-            if (materiaPrima != null)
+            using (var context = _contextFactory.CreateDbContext())
             {
-                _context.MateriasPrimas.Remove(materiaPrima);
-                await _context.SaveChangesAsync();
+                var materiaPrima = await context.MateriasPrimas.FindAsync(id);
+                if (materiaPrima != null)
+                {
+                    context.MateriasPrimas.Remove(materiaPrima);
+                    await context.SaveChangesAsync();
+                }
             }
         }
+
+        
     }
 }

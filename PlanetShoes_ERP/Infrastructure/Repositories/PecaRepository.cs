@@ -9,18 +9,28 @@ namespace PlanetShoes.Infrastructure.Repositories
     public class PecaRepository : IPecaRepository
     {
 
-        private readonly PlanetShoesDbContext _context;
+        //private readonly PlanetShoesDbContext _context;
 
-        public PecaRepository(PlanetShoesDbContext context)
+        //public PecaRepository(PlanetShoesDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly IDbContextFactory<PlanetShoesDbContext> _contextFactory;
+
+        public PecaRepository(IDbContextFactory<PlanetShoesDbContext> contextFactory)
         {
-            _context = context;
+            _contextFactory = contextFactory;
         }
 
         public async Task<List<Peca>> GetPecasByEstruturaIdAsync(string idEstrutura)
         {
-            return await _context.Pecas
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await context.Pecas
                 .Where(p => p.IdEstrutura == idEstrutura)
                 .ToListAsync();
+            }
         }
     }
 }

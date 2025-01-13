@@ -15,16 +15,16 @@ namespace PlanetShoes.Infrastructure.Tests.EstruturaTest
         private readonly PlanetShoesDbContext _context;
         private readonly IEstruturaRepository _estruturaRepository;
 
-        public EstruturaTests()
-        {
-            // Configura o banco em memória
-            _options = new DbContextOptionsBuilder<PlanetShoesDbContext>()
-                .UseInMemoryDatabase(databaseName: "EstruturaTestDb")
-                .Options;
+        //public EstruturaTests()
+        //{
+        //    // Configura o banco em memória
+        //    _options = new DbContextOptionsBuilder<PlanetShoesDbContext>()
+        //        .UseInMemoryDatabase(databaseName: "EstruturaTestDb")
+        //        .Options;
 
-            _context = new PlanetShoesDbContext(_options);
-            _estruturaRepository = new EstruturaRepository(_context);
-        }
+        //    _context = new PlanetShoesDbContext(_options);
+        //    _estruturaRepository = new EstruturaRepository(_context);
+        //}
 
         // Implementação do IDisposable
         public void Dispose()

@@ -6,6 +6,7 @@ using PlanetShoes.ViewModels;
 using System.Windows;
 using PlanetShoes.Infrastructure.Context;
 using PlanetShoes.Infrastructure.Service;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlanetShoes
 {
@@ -30,7 +31,21 @@ namespace PlanetShoes
         private void ConfigureServices(IServiceCollection services)
         {
             // Configura o DbContext
-            services.AddDbContext<PlanetShoesDbContext>();
+            //services.AddDbContext<PlanetShoesDbContext>();
+
+            // Configura o IDbContextFactory
+            services.AddDbContextFactory<PlanetShoesDbContext>(options =>
+            {
+                // string de conexão
+                options.UseSqlServer("Server=localhost\\SQLEXPRESS;" +
+                "Database=PlanetShoesDb;" +
+                "Integrated Security=True;" +
+                "Connect Timeout=30;" +
+                "Encrypt=True;" +
+                "Trust Server Certificate=True;" +
+                "Application Intent=ReadWrite;" +
+                "Multi Subnet Failover=False"); 
+            });
 
             // Registra os repositórios
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();

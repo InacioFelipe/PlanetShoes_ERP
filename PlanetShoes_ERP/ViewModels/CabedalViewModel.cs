@@ -26,10 +26,26 @@ namespace PlanetShoes.ViewModels
             DesignsCabedal = new ObservableCollection<DesignCabedal>();
             PecasDaEstruturaSelecionada = new ObservableCollection<Peca>();
             MateriasPrimas = new ObservableCollection<MateriaPrima>();
+            MateriasPrimasDasPecas = new ObservableCollection<MateriaPrima>();
 
             // Carrega as estruturas e designs
             CarregarEstruturasComPecaCabedal();
             CarregarDesignsCabedal();
+
+            // Seleciona a primeira estrutura automaticamente
+            if (EstruturasComPecaCabedal.Any())
+            {
+                EstruturaSelecionada = EstruturasComPecaCabedal.First();
+
+                // Força o carregamento das matérias-primas das peças da estrutura selecionada
+                CarregarPecasDaEstruturaSelecionada().ContinueWith(task =>
+                {
+                    if (!task.IsFaulted)
+                    {
+                        CarregarMateriasPrimasDasPecas();
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
         }
 
         // Propriedades para as estruturas
@@ -58,8 +74,13 @@ namespace PlanetShoes.ViewModels
                 {
                     // Carrega as peças da estrutura selecionada
                     CarregarPecasDaEstruturaSelecionada();
+
+                    // Carrega as matérias-primas das Peças da Estrutura selecionada
+                    CarregarMateriasPrimasDasPecas();
+
                     // Seleciona a primeira peça por padrão
                     PecaSelecionada = PecasDaEstruturaSelecionada.FirstOrDefault();
+
                 }
             }
         }
@@ -70,6 +91,14 @@ namespace PlanetShoes.ViewModels
         {
             get => _pecasDaEstruturaSelecionada;
             set => SetProperty(ref _pecasDaEstruturaSelecionada, value);
+        }
+
+        // Propriedades para as materias primas das peças da estrutura selecionada
+        private ObservableCollection<MateriaPrima> _materiasPrimasDasPecas;
+        public ObservableCollection<MateriaPrima> MateriasPrimasDasPecas
+        {
+            get => _materiasPrimasDasPecas;
+            set => SetProperty(ref _materiasPrimasDasPecas, value);
         }
 
         private Peca _pecaSelecionada;
@@ -333,10 +362,12 @@ namespace PlanetShoes.ViewModels
             DesignsCabedal = new ObservableCollection<DesignCabedal>(designsCabedal);
         }
 
-        private async void CarregarPecasDaEstruturaSelecionada()
+        private async Task CarregarPecasDaEstruturaSelecionada()
         {
             if (EstruturaSelecionada != null)
             {
+                PecasDaEstruturaSelecionada.Clear();
+
                 // Carrega as peças da estrutura selecionada
                 var pecas = await _pecaRepository.GetPecasByEstruturaIdAsync(EstruturaSelecionada.IdEstrutura);
                 PecasDaEstruturaSelecionada = new ObservableCollection<Peca>(pecas);
@@ -346,6 +377,9 @@ namespace PlanetShoes.ViewModels
                 {
                     PecaSelecionada = PecasDaEstruturaSelecionada.First();
                 }
+
+                // Carrega as matérias-primas das peças da estrutura selecionada
+                await CarregarMateriasPrimasDasPecas();
             }
             else
             {
@@ -380,6 +414,19 @@ namespace PlanetShoes.ViewModels
             {
                 MateriasPrimas.Clear();
                 MateriaPrimaSelecionada = null;
+            }
+        }
+        private async Task CarregarMateriasPrimasDasPecas()
+        {
+            if (PecasDaEstruturaSelecionada != null && PecasDaEstruturaSelecionada.Any())
+            {
+                var codigosPecas = PecasDaEstruturaSelecionada.Select(p => p.Codigo).ToList();
+                var materiasPrimas = await _materiaPrimaRepository.GetByPecasCodigosAsync(codigosPecas);
+                MateriasPrimasDasPecas = new ObservableCollection<MateriaPrima>(materiasPrimas); // Usa a nova lista
+            }
+            else
+            {
+                MateriasPrimasDasPecas.Clear(); // Limpa a nova lista
             }
         }
     }
